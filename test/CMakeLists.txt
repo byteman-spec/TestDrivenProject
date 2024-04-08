@@ -13,6 +13,7 @@ add_executable(${This} "${HEADER_FILES}" "${SRC_FILES}")
 #including third party libraries
 target_link_libraries(${This} PUBLIC
 	GTest::gtest_main
+	GTest::gmock_main
 	TestDrivenProject
 )
 

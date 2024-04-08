@@ -5,10 +5,10 @@
 #include <gtest/gtest.h>
 #include "../../../src/main/GoogleTestClone.cpp"
 
-TEST(UnitTestSuite, TestAssert)
-{
-	ASSERT_EQ(1, 1);
-}
+//TEST(UnitTestSuite, TestAssert)
+//{
+//	ASSERT_EQ(1, 1);
+//}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
