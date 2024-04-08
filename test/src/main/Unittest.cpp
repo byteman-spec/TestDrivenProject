@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
+#include "../../../src/main/GoogleTestClone.cpp"
 
 TEST(UnitTestSuite, TestAssert)
 {
