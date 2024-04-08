@@ -1,0 +1,3 @@
+[submodule "tincl/googletest"]
+	path = tincl/googletest
+	url = https://github.com/google/googletest.git
