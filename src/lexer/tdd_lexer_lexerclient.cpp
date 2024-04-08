@@ -58,24 +58,28 @@ SyntaxToken LexerClient::NextToken()
 	}
 	else if (GetCurrent() == '+')
 	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return SyntaxToken(SyntaxKind::PlusToken, start, std::string(1,GetCurrent()));
+		return SyntaxToken(SyntaxKind::PlusToken, start, syntaxTokenStr);
 	}
 
 	else if (GetCurrent() == '*')
 	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::MulToken, start, std::string(1, GetCurrent()));
+		return  SyntaxToken(SyntaxKind::MulToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '\0')
 	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::EndOfFileToken, start, std::string(1, GetCurrent()));
+		return  SyntaxToken(SyntaxKind::EndOfFileToken, start, syntaxTokenStr);
 	}
 	else
 	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::InvalidToken, start, std::string(1, GetCurrent()));
+		return  SyntaxToken(SyntaxKind::InvalidToken, start, syntaxTokenStr);
 	}
 }
 

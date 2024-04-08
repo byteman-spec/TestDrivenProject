@@ -59,7 +59,7 @@ namespace TDD {
 			vector<SyntaxToken> procResult = lexer.Init();
 
 			//ASSERT
-			EXPECT_EQ(0, 0);
+			EXPECT_EQ(procResult, expectedResult);
 
 		};
 
