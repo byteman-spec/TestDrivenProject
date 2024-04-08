@@ -56,8 +56,8 @@ namespace TDD {
 	}
 }
 
-int main(int argc_, char** argv)
-{
-	testing::InitGoogleTest(&argc_, argv);
-	return RUN_ALL_TESTS();
-}
+//int main(int argc_, char** argv)
+//{
+//	testing::InitGoogleTest(&argc_, argv);
+//	return RUN_ALL_TESTS();
+//}
