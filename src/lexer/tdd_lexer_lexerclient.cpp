@@ -67,13 +67,37 @@ SyntaxToken LexerClient::NextToken()
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::MulToken, start, syntaxTokenStr);
+		return  SyntaxToken(SyntaxKind::StarToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '\0')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
 		return  SyntaxToken(SyntaxKind::EndOfFileToken, start, syntaxTokenStr);
+	}
+	else if (GetCurrent() == '-')
+	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
+		Next();
+		return  SyntaxToken(SyntaxKind::HyphenToken, start, syntaxTokenStr);
+	}
+	else if (GetCurrent() == '(')
+	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
+		Next();
+		return  SyntaxToken(SyntaxKind::OpenParanthesisToken, start, syntaxTokenStr);
+	}
+	else if (GetCurrent() == ')')
+	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
+		Next();
+		return  SyntaxToken(SyntaxKind::CloseParanthesisToken, start, syntaxTokenStr);
+	}
+	else if (GetCurrent() == '/')
+	{
+		auto syntaxTokenStr = std::string(1, GetCurrent());
+		Next();
+		return  SyntaxToken(SyntaxKind::SlashToken, start, syntaxTokenStr);
 	}
 	else
 	{

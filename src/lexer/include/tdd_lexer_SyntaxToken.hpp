@@ -19,8 +19,12 @@ namespace TDD {
 			NumberToken,
 			WhitespaceToken,
 			PlusToken,
-			MulToken,
+			HyphenToken,
+			StarToken,
 			EndOfFileToken,
+			OpenParanthesisToken,
+			CloseParanthesisToken,
+			SlashToken,
 			InvalidToken
 		};
 
