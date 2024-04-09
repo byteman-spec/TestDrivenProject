@@ -5,7 +5,7 @@ Header for lexer created 																		##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
 #################################################################################################*/
 #include "include/tdd_lexer_lexerclient.hpp"
-#include "include/tdd_lexer_SyntaxToken.hpp"
+#include "../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
 #include <string>
 #include <vector>
 #include <cctype>
@@ -14,6 +14,7 @@ Header for lexer created 																		##
 using namespace std;
 using namespace TDD;
 using namespace TDD::Lexer;
+using namespace TDD::SyntaxNode;
 
 char LexerClient::GetCurrent()
 {

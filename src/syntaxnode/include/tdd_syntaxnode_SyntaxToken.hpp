@@ -4,16 +4,15 @@ Header for lexer created 																		##
 #DATE						#USERNAME		#DESC												##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
 #################################################################################################*/
-#ifndef TDD_LEXER_SYNTAXTOKEN_HPP
-#define	TDD_LEXER_SYNTAXTOKEN_HPP
+#ifndef TDD_SYNTAXNODE_SYNTAXTOKEN_HPP
+#define	TDD_SYNTAXNODE_SYNTAXTOKEN_HPP
 #include <string>
 #include <vector>
-
 using namespace std;
 
 namespace TDD {
 
-	namespace Lexer {
+	namespace SyntaxNode {
 
 		enum SyntaxKind {
 			NumberToken,
@@ -25,10 +24,27 @@ namespace TDD {
 			OpenParanthesisToken,
 			CloseParanthesisToken,
 			SlashToken,
-			InvalidToken
+			InvalidToken,
+			SyntaxNodeToken,
+			ExpressionSyntaxNodeToken,
+			NumberExpressionSyntaxNodeToken,
+			BinaryExpressionSyntaxNodeToken
 		};
 
-		class SyntaxToken 
+		class ISyntaxNode
+		{
+
+		public:
+
+			virtual SyntaxKind GetKind()
+			{
+				return SyntaxKind::SyntaxNodeToken;
+			}
+
+			virtual vector<ISyntaxNode> GetChildren() = 0;
+		};
+
+		class SyntaxToken : ISyntaxNode
 		{
 		private :
 			SyntaxKind m_syntaxKind;
@@ -47,12 +63,20 @@ namespace TDD {
 				return m_syntaxKind;
 			}
 
+			vector<ISyntaxNode> GetChildren() override
+			{
+				return vector<ISyntaxNode>{};
+			}
+
 			bool operator==(const SyntaxToken& other) const {
 				return m_syntaxKind == other.m_syntaxKind &&
 					m_position == other.m_position &&
 					m_text == other.m_text;
 			}
 		};
+
+		using SyntaxTokenList = vector<SyntaxToken>;
+
 	}
 }
-#endif // !TDD_LEXER_SYNTAXTOKEN_HPP
+#endif // !TDD_SYNTAXNODE_SYNTAXTOKEN_HPP

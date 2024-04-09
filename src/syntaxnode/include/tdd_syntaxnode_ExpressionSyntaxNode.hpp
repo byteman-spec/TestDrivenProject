@@ -4,36 +4,27 @@ Header for lexer created 																		##
 #DATE						#USERNAME		#DESC												##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
 #################################################################################################*/
-#ifndef TDD_LEXER_LEXERCLIENT_HPP
-#define	TDD_LEXER_LEXERCLIENT_HPP
+#ifndef TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
+#define	TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
 #include <string>
 #include <vector>
-#include "tdd_lexer_ilexer.hpp"
-#include "../../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
-
+#include "tdd_syntaxnode_SyntaxToken.hpp"
 using namespace std;
 
 namespace TDD {
 
-	namespace Lexer {
+	namespace SyntaxNode {
 
-		class LexerClient : ILexer
+		class ExpressionSyntaxNode : public ISyntaxNode
 		{
-		private :
-			string m_queryText;
-			int m_position;
-			char GetCurrent();
-			void Next();
-			SyntaxToken NextToken();
+
 		public:
-			LexerClient(string queryText) : m_queryText(queryText)
+
+			 SyntaxKind GetKind() override
 			{
-				m_position = 0;
+				return SyntaxKind::ExpressionSyntaxNodeToken;
 			}
-			SyntaxTokenList Init() override;
-
-
 		};
 	}
 }
-#endif // !TDD_LEXER_LEXERCLIENT_HPP
+#endif // !TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP

@@ -10,13 +10,14 @@ Interface for dbclient created for GtestMocking													##
 #include <string>
 #include <vector>
 #include "../../../src/lexer/include/tdd_lexer_lexerclient.hpp"
-#include "../../../src/lexer/include/tdd_lexer_SyntaxToken.hpp"
+#include "../../../src/syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
 
 
 using namespace testing;
 using namespace std;
 using namespace TDD;
 using namespace TDD::Lexer;
+using namespace TDD::SyntaxNode;
 
 
 namespace TDD {
