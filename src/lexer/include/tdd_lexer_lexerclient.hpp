@@ -16,6 +16,8 @@ using namespace std;
 namespace TDD {
 
 	namespace Lexer {
+		class LexerClient;
+		using LexerClientPtr = shared_ptr<LexerClient>;
 
 		class LexerClient : ILexer
 		{
@@ -24,7 +26,7 @@ namespace TDD {
 			int m_position;
 			char GetCurrent();
 			void Next();
-			SyntaxToken NextToken();
+			SyntaxTokenPtr NextToken();
 		public:
 			LexerClient(string queryText) : m_queryText(queryText)
 			{

@@ -16,7 +16,8 @@ using namespace TDD::SyntaxNode;
 namespace TDD {
 
 	namespace Lexer {
-
+		class ILexer;
+		using ILexerPtr = shared_ptr<ILexer>;
 
 		class ILexer
 		{

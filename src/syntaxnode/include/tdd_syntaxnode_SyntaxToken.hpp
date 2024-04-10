@@ -8,6 +8,7 @@ Header for lexer created 																		##
 #define	TDD_SYNTAXNODE_SYNTAXTOKEN_HPP
 #include <string>
 #include <vector>
+#include <memory>
 using namespace std;
 
 namespace TDD {
@@ -30,6 +31,8 @@ namespace TDD {
 			NumberExpressionSyntaxNodeToken,
 			BinaryExpressionSyntaxNodeToken
 		};
+		class ISyntaxNode;
+		using ISyntaxNodePtr = std::shared_ptr<ISyntaxNode>;
 
 		class ISyntaxNode
 		{
@@ -41,9 +44,11 @@ namespace TDD {
 				return SyntaxKind::SyntaxNodeToken;
 			}
 
-			virtual vector<ISyntaxNode> GetChildren() = 0;
+			virtual vector<ISyntaxNodePtr> GetChildren() = 0;
 		};
 
+		class SyntaxToken;
+		using SyntaxTokenPtr = shared_ptr<SyntaxToken>;
 		class SyntaxToken : ISyntaxNode
 		{
 		private :
@@ -63,19 +68,19 @@ namespace TDD {
 				return m_syntaxKind;
 			}
 
-			vector<ISyntaxNode> GetChildren() override
+			vector<ISyntaxNodePtr> GetChildren() override
 			{
-				return vector<ISyntaxNode>{};
+				return vector<ISyntaxNodePtr>{};
 			}
 
-			bool operator==(const SyntaxToken& other) const {
+			bool operator==(const SyntaxToken other) const {
 				return m_syntaxKind == other.m_syntaxKind &&
 					m_position == other.m_position &&
 					m_text == other.m_text;
 			}
 		};
 
-		using SyntaxTokenList = vector<SyntaxToken>;
+		using SyntaxTokenList = vector<SyntaxTokenPtr>;
 
 	}
 }

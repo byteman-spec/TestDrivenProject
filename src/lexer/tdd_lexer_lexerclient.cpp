@@ -32,7 +32,7 @@ void LexerClient::Next()
 	m_position++;
 }
 
-SyntaxToken LexerClient::NextToken()
+SyntaxTokenPtr LexerClient::NextToken()
 {
 	int start = m_position;
 	if (std::isdigit(GetCurrent()))
@@ -43,7 +43,7 @@ SyntaxToken LexerClient::NextToken()
 		}
 		int tokenLength = m_position - start;
 		string tokenString = m_queryText.substr(start,tokenLength);
-		return  SyntaxToken(SyntaxKind::NumberToken, start, tokenString);
+		return  make_shared<SyntaxToken>(SyntaxKind::NumberToken, start, tokenString);
 	}
 
 	else if (std::isspace(GetCurrent()))
@@ -55,70 +55,70 @@ SyntaxToken LexerClient::NextToken()
 		}
 		int tokenLength = m_position - start;
 		string tokenString = m_queryText.substr(start, tokenLength);
-		return SyntaxToken(SyntaxKind::WhitespaceToken, start, tokenString);
+		return make_shared<SyntaxToken>(SyntaxKind::WhitespaceToken, start, tokenString);
 	}
 	else if (GetCurrent() == '+')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return SyntaxToken(SyntaxKind::PlusToken, start, syntaxTokenStr);
+		return make_shared<SyntaxToken>(SyntaxKind::PlusToken, start, syntaxTokenStr);
 	}
 
 	else if (GetCurrent() == '*')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::StarToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::StarToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '\0')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::EndOfFileToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::EndOfFileToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '-')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::HyphenToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::HyphenToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '(')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::OpenParanthesisToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::OpenParanthesisToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == ')')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::CloseParanthesisToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::CloseParanthesisToken, start, syntaxTokenStr);
 	}
 	else if (GetCurrent() == '/')
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::SlashToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::SlashToken, start, syntaxTokenStr);
 	}
 	else
 	{
 		auto syntaxTokenStr = std::string(1, GetCurrent());
 		Next();
-		return  SyntaxToken(SyntaxKind::InvalidToken, start, syntaxTokenStr);
+		return  make_shared<SyntaxToken>(SyntaxKind::InvalidToken, start, syntaxTokenStr);
 	}
 }
 
 SyntaxTokenList LexerClient::Init() 
 {
-	vector<SyntaxToken> tokenList{};
-	SyntaxToken currentToken = NextToken();
+	vector<SyntaxTokenPtr> tokenList{};
+	SyntaxTokenPtr currentToken = NextToken();
 	 do
 	{
-		 if (currentToken.GetKind() != SyntaxKind::EndOfFileToken)
+		 if (currentToken->GetKind() != SyntaxKind::EndOfFileToken)
 		 {
 			 tokenList.emplace_back(currentToken);
 		 }
 		 currentToken = NextToken();
-	 } while (currentToken.GetKind() != SyntaxKind::EndOfFileToken);
+	 } while (currentToken->GetKind() != SyntaxKind::EndOfFileToken);
 	 return tokenList;
 }

@@ -9,20 +9,25 @@ Header for lexer created 																		##
 #include <string>
 #include <vector>
 #include "tdd_syntaxnode_SyntaxToken.hpp"
+#include "tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+
 using namespace std;
 
 namespace TDD {
 
 	namespace SyntaxNode {
 
+		class NumberExpressionSyntaxNode;
+		using NumberExpressionSyntaxNodePtr = shared_ptr<NumberExpressionSyntaxNode>;
+
 		class NumberExpressionSyntaxNode : public ExpressionSyntaxNode
 		{
 
 		private : 
-			SyntaxToken m_numberSyntaxToken;
+			SyntaxTokenPtr m_numberSyntaxToken;
 		public:
 			
-			NumberExpressionSyntaxNode(const SyntaxToken& syntaxToken) : m_numberSyntaxToken(syntaxToken)
+			NumberExpressionSyntaxNode(const SyntaxTokenPtr syntaxToken) : m_numberSyntaxToken(syntaxToken)
 			{
 
 			}
@@ -32,9 +37,9 @@ namespace TDD {
 				return SyntaxKind::ExpressionSyntaxNodeToken;
 			}
 
-			vector<ISyntaxNode> GetChildren() override
+			vector<ISyntaxNodePtr> GetChildren() override
 			{
-				vector<ISyntaxNode> childrenList;
+				vector<ISyntaxNodePtr> childrenList;
 				childrenList.emplace_back(m_numberSyntaxToken);
 				return childrenList;
 			}

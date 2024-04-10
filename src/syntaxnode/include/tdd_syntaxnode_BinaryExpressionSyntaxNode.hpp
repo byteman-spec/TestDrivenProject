@@ -9,22 +9,26 @@ Header for lexer created 																		##
 #include <string>
 #include <vector>
 #include "tdd_syntaxnode_SyntaxToken.hpp"
+#include "tdd_syntaxnode_ExpressionSyntaxNode.hpp"
 using namespace std;
 
 namespace TDD {
 
 	namespace SyntaxNode {
 
+		class BinaryExpressionSyntaxNode;
+		using BinaryExpressionSyntaxNodePtr = shared_ptr<BinaryExpressionSyntaxNode>;
+
 		class BinaryExpressionSyntaxNode : public ExpressionSyntaxNode
 		{
 
 		private : 
-			ExpressionSyntaxNode m_left;
-			ExpressionSyntaxNode m_right;
-			SyntaxToken m_operatorSyntaxToken;
+			ExpressionSyntaxNodePtr m_left;
+			ExpressionSyntaxNodePtr m_right;
+			SyntaxTokenPtr m_operatorSyntaxToken;
 		public:
 			
-			BinaryExpressionSyntaxNode(const ExpressionSyntaxNode& left,const ExpressionSyntaxNode& right,const SyntaxToken& syntaxToken) : 
+			BinaryExpressionSyntaxNode(const ExpressionSyntaxNodePtr left,const ExpressionSyntaxNodePtr right,const SyntaxTokenPtr syntaxToken) : 
 				m_operatorSyntaxToken(syntaxToken), m_left (left) , m_right (right)
 			{
 
@@ -32,14 +36,14 @@ namespace TDD {
 
 			SyntaxKind GetKind() override
 			{
-				return SyntaxKind::BinaryExpressionSyntaxNode;
+				return SyntaxKind::BinaryExpressionSyntaxNodeToken;
 			}
 
-			vector<ISyntaxNode> GetChildren() override
+			vector<ISyntaxNodePtr> GetChildren() override
 			{
-				vector <ISyntaxNode> left = m_left.GetChildren();
-				vector <ISyntaxNode> operatorToken = m_operatorSyntaxToken.GetChildren();
-				vector <ISyntaxNode> right = m_right.GetChildren();
+				vector <ISyntaxNodePtr> left = m_left->GetChildren();
+				vector <ISyntaxNodePtr> operatorToken = m_operatorSyntaxToken->GetChildren();
+				vector <ISyntaxNodePtr> right = m_right->GetChildren();
 
 				left.insert(left.end(), operatorToken.begin(), operatorToken.end());
 				left.insert(left.end(), right.begin(), right.end());

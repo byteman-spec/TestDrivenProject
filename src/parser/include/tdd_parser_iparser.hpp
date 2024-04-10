@@ -9,7 +9,7 @@ Interface for lexer created 																	##
 #include <string>
 #include <vector>
 #include "../../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
-#include "../../syntaxnode/include/tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+//#include "../../syntaxnode/include/tdd_syntaxnode_ExpressionSyntaxNode.hpp"
 
 using namespace std;
 using namespace TDD::SyntaxNode;
@@ -17,6 +17,7 @@ using namespace TDD::SyntaxNode;
 namespace TDD {
 
 	namespace Parser {
+		class ExpressionSyntaxNode;
 
 		class IParser
 		{

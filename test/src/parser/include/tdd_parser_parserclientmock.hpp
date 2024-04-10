@@ -4,30 +4,26 @@ Header for lexer created 																		##
 #DATE						#USERNAME		#DESC												##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
 #################################################################################################*/
-#ifndef TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
-#define	TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
+#ifndef TDD_LEXER_LEXERCLIENTMOCK_HPP
+#define	TDD_LEXER_LEXERCLIENTMOCK_HPP
 #include <string>
 #include <vector>
-#include "tdd_syntaxnode_SyntaxToken.hpp"
+#include "../../../../src/parser/include/tdd_parser_iparser.hpp"
+#include <gmock/gmock.h>
+
 using namespace std;
 
 namespace TDD {
 
-	namespace SyntaxNode {
-
+	namespace Parser {
 		class ExpressionSyntaxNode;
-		using ExpressionSyntaxNodePtr = shared_ptr<ExpressionSyntaxNode>;
 
-		class ExpressionSyntaxNode : public ISyntaxNode
+		class ParserClientMock : IParser
 		{
 
 		public:
-
-			 SyntaxKind GetKind() override
-			{
-				return SyntaxKind::ExpressionSyntaxNodeToken;
-			}
+			MOCK_METHOD(ExpressionSyntaxNode, Parse, (const string& queryText), (override));
 		};
 	}
 }
-#endif // !TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
+#endif // !TDD_LEXER_LEXERCLIENTMOCK_HPP
