@@ -45,20 +45,24 @@ namespace TDD {
 			}
 
 			virtual vector<ISyntaxNodePtr> GetChildren() = 0;
+
+			virtual bool operator==(const ISyntaxNode& other) const {
+				return true;
+			}
 		};
 
 		class SyntaxToken;
 		using SyntaxTokenPtr = shared_ptr<SyntaxToken>;
-		class SyntaxToken : ISyntaxNode
+		class SyntaxToken : public ISyntaxNode
 		{
-		private :
+		private:
 			SyntaxKind m_syntaxKind;
 			int m_position;
 			string m_text;
 
 		public:
-			SyntaxToken(SyntaxKind kind, int position, string text) : 
-				m_syntaxKind( kind ), m_position( position ), m_text( text )
+			SyntaxToken(SyntaxKind kind, int position, string text) :
+				m_syntaxKind(kind), m_position(position), m_text(text)
 			{
 
 			};
@@ -73,15 +77,26 @@ namespace TDD {
 				return vector<ISyntaxNodePtr>{};
 			}
 
-			bool operator==(const SyntaxToken other) const {
-				return m_syntaxKind == other.m_syntaxKind &&
-					m_position == other.m_position &&
-					m_text == other.m_text;
+			bool operator==(const ISyntaxNode& other) const override
+			{
+				if (const SyntaxToken* derivedOther = static_cast<const SyntaxToken*>(&other))
+				{
+					if (m_syntaxKind == derivedOther->m_syntaxKind &&
+						m_position == derivedOther->m_position &&
+						m_text == derivedOther->m_text)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				return false;
 			}
+
 		};
-
-		using SyntaxTokenList = vector<SyntaxTokenPtr>;
-
+			using SyntaxTokenList = vector<SyntaxTokenPtr>;
 	}
 }
 #endif // !TDD_SYNTAXNODE_SYNTAXTOKEN_HPP
