@@ -28,6 +28,12 @@ namespace TDD {
 				return emptyList;
 			};
 
+			virtual SyntaxTokenList Init(const string& queryText, bool force = false)
+			{
+				SyntaxTokenList emptyList{};
+				return emptyList;
+			};
+
 		};
 	}
 }

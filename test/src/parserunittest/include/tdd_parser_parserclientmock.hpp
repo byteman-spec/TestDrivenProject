@@ -4,8 +4,8 @@ Header for lexer created 																		##
 #DATE						#USERNAME		#DESC												##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
 #################################################################################################*/
-#ifndef TDD_LEXER_LEXERCLIENTMOCK_HPP
-#define	TDD_LEXER_LEXERCLIENTMOCK_HPP
+#ifndef TDD_PARSERUNITTEST_PARSERCLIENTMOCK_HPP
+#define	TDD_PARSERUNITTEST_PARSERCLIENTMOCK_HPP
 #include <string>
 #include <vector>
 #include "../../../../src/parser/include/tdd_parser_iparser.hpp"
@@ -15,7 +15,7 @@ using namespace std;
 
 namespace TDD {
 
-	namespace Parser {
+	namespace ParserUnitTest {
 		class ExpressionSyntaxNode;
 
 		class ParserClientMock : IParser
@@ -26,4 +26,4 @@ namespace TDD {
 		};
 	}
 }
-#endif // !TDD_LEXER_LEXERCLIENTMOCK_HPP
+#endif // !TDD_PARSERUNITTEST_PARSERCLIENTMOCK_HPP

@@ -122,3 +122,18 @@ SyntaxTokenList LexerClient::Init()
 	 } while (currentToken->GetKind() != SyntaxKind::EndOfFileToken);
 	 return tokenList;
 }
+
+SyntaxTokenList LexerClient::Init(const string& queryText, bool force ) 
+{
+	if (m_queryText.empty() || force)
+	{
+		m_queryText = queryText;
+		m_position = 0;
+		return Init();
+	}
+	else
+	{
+		return Init();
+	}
+
+}
