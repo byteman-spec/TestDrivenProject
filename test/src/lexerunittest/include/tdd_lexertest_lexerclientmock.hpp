@@ -17,12 +17,13 @@ using namespace TDD::Lexer;
 namespace TDD {
 
 	namespace LexerUnitTest {
-
-		class LexerClientMock : ILexer
+		class LexerClientMock;
+		using LexerClientMockPtr = shared_ptr<LexerClientMock>;
+		class LexerClientMock : public ILexer
 		{
 
 		public:
-			MOCK_METHOD(SyntaxTokenList, Init, (), (override));
+			MOCK_METHOD(SyntaxTokenList, Init,(), (override));
 
 			MOCK_METHOD(SyntaxTokenList, Init, (const string& queryText, bool force ), (override));
 

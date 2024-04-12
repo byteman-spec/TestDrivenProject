@@ -137,3 +137,8 @@ SyntaxTokenList LexerClient::Init(const string& queryText, bool force )
 	}
 
 }
+
+string LexerClient::GetQueryString() const
+{
+	return m_queryText;
+}

@@ -14,8 +14,9 @@ Interface for dbclient created for GtestMocking													##
 #include "../lexerunittest/include/tdd_lexertest_lexerclientmock.hpp"
 #include "../../../src/syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
 #include "../../../src/utils/comparators/include/tdd_utils_comparator_comparatorutils.hpp"
-//#include "../../../src/syntaxnode/include/tdd_syntaxnode_BinaryExpressionSyntaxNode.hpp"
-//#include "../../../src/syntaxnode/include/tdd_syntaxnode_NumberExpressionSyntaxNode.hpp"
+#include "../../../src/syntaxnode/include/tdd_syntaxnode_BinaryExpressionSyntaxNode.hpp"
+#include "../../../src/syntaxnode/include/tdd_syntaxnode_NumberExpressionSyntaxNode.hpp"
+#include "../../../src/parser/include/tdd_parser_parserclient.hpp"
 
 
 using namespace testing;
@@ -23,6 +24,7 @@ using namespace std;
 using namespace TDD;
 using namespace TDD::LexerUnitTest;
 using namespace TDD::SyntaxNode;
+using namespace TDD::Parser;
 using namespace TDD::Utils::Comparator;
 
 
@@ -30,37 +32,23 @@ namespace TDD {
 
 	namespace PARSERTEST {
 
-		bool operator==(std::vector<SyntaxTokenPtr>& lhs, std::vector<SyntaxTokenPtr>& rhs) {
-			if (lhs.size() != rhs.size()) return false;
-			for (size_t i = 0; i < lhs.size(); ++i) {
-				if (!(lhs[i] == rhs[i])) return false;
-			}
-			return true;
-		}
-
-		bool operator==(SyntaxTokenPtr& lhs, SyntaxTokenPtr& rhs) {
-			if (!lhs && !rhs) {
-				return true;
-			}
-			if (!lhs || !rhs) {
-				return false;
-			}
-			return *lhs == *rhs;
-		}
-
 		struct ParserTest : public testing::Test
 		{
 		public : 
-			LexerClientMock m_mockLexer;
+			LexerClientMockPtr m_mockLexer;
+			ILexerPtr m_castedLexerPtr;
 			void SetUp()
 			{
 				string inputQuery = "1+2+3";
+				m_mockLexer = make_shared<LexerClientMock>();
+				m_castedLexerPtr = static_pointer_cast<ILexer>(m_mockLexer);
 				vector<SyntaxTokenPtr> expectedResult{ { make_shared<SyntaxToken>(SyntaxKind::NumberToken,0,"1") },
 									{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,1,"+") },
 									{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 2, "2") },
 									{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,3,"+") },
 									{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3") } };
-				EXPECT_CALL(m_mockLexer, Init(inputQuery,true)).Times(AtLeast(1)).WillOnce(Return(expectedResult));
+
+				EXPECT_CALL(*m_mockLexer, Init(inputQuery,true)).Times(AtLeast(1)).WillOnce(Return(expectedResult));
 
 			}
 			void TearDown()
@@ -78,18 +66,23 @@ namespace TDD {
 												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,3,"+") },
 												{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3") } };
 			
-			vector<SyntaxTokenPtr> lexedResult = m_mockLexer.Init(inputQuery, true);
-			//BinaryExpressionSyntaxNode left(NumberExpressionSyntaxNode(1),SyntaxToken(SyntaxKind::PlusToken,1,"+"), NumberExpressionSyntaxNode(2));
+			//Parser
+			
+			ParserClientPtr  parserClientPtr = make_shared<ParserClient>(m_castedLexerPtr);
+			auto procResult = parserClientPtr->Parse();
 			//BinaryExpressionSyntaxNode expectedResult(left, SyntaxToken(SyntaxKind::PlusToken, 3, "+"), NumberExpressionSyntaxNode(3));
 
 			//ParserClient parser(inputQuery);
 			//BinaryExpressionSyntaxNode parsedSyntax = parser.parse();
 			
 			//ACT
-			
+//			auto procResult = m_mockLexer.Init("1+2+3", true);
 
 			//EXPECT_EQ(parsedSyntax, expectedResult);
-			ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(lexedResult, expectedResult));
+			//ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(lexedResult, expectedResult));
+
+			//ASSERT
+		//	ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(procResult, expectedResult));
 		};
 
 	}

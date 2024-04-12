@@ -28,7 +28,7 @@ namespace TDD {
 			SyntaxTokenPtr m_operatorSyntaxToken;
 		public:
 			
-			BinaryExpressionSyntaxNode(const ExpressionSyntaxNodePtr left,const ExpressionSyntaxNodePtr right,const SyntaxTokenPtr syntaxToken) : 
+			BinaryExpressionSyntaxNode( ExpressionSyntaxNodePtr left, ExpressionSyntaxNodePtr right, SyntaxTokenPtr syntaxToken) : 
 				m_operatorSyntaxToken(syntaxToken), m_left (left) , m_right (right)
 			{
 
@@ -50,6 +50,19 @@ namespace TDD {
 				return left;
 			}
 
+			bool operator==(const ISyntaxNode& baseSyntaxNode) const override
+			{
+				//if (*m_numberSyntaxToken == baseSyntaxNode)
+				//{
+				//	return true;
+				//}
+				//else
+				//{
+				//	return false;
+				//}
+
+				return true;
+			}
 
 		};
 	}

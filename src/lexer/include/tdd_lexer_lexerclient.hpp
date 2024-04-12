@@ -36,6 +36,7 @@ namespace TDD {
 
 			SyntaxTokenList Init(const string& queryText, bool force = false) override;
 
+			string GetQueryString() const override;
 		};
 	}
 }

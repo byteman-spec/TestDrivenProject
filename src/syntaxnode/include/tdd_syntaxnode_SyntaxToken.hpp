@@ -77,13 +77,13 @@ namespace TDD {
 				return vector<ISyntaxNodePtr>{};
 			}
 
-			bool operator==(const ISyntaxNode& other) const override
+			bool operator==(const ISyntaxNode& baseClassSyntaxNode) const override
 			{
-				if (const SyntaxToken* derivedOther = static_cast<const SyntaxToken*>(&other))
+				if (const SyntaxToken* syntaxToken = static_cast<const SyntaxToken*>(&baseClassSyntaxNode))
 				{
-					if (m_syntaxKind == derivedOther->m_syntaxKind &&
-						m_position == derivedOther->m_position &&
-						m_text == derivedOther->m_text)
+					if (m_syntaxKind == syntaxToken->m_syntaxKind &&
+						m_position == syntaxToken->m_position &&
+						m_text == syntaxToken->m_text)
 					{
 						return true;
 					}

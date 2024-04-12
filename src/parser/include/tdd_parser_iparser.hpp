@@ -8,22 +8,30 @@ Interface for lexer created 																	##
 #define	TDD_LEXER_IPARSER_HPP
 #include <string>
 #include <vector>
+#include <memory>
 #include "../../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
-//#include "../../syntaxnode/include/tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+#include "../../syntaxnode/include/tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+#include "../../lexer/include/tdd_lexer_ilexer.hpp"
 
 using namespace std;
 using namespace TDD::SyntaxNode;
+using namespace TDD::Lexer;
 
 namespace TDD {
 
 	namespace Parser {
-		class ExpressionSyntaxNode;
-
+		
 		class IParser
 		{
 		public:
 
-			virtual ExpressionSyntaxNode Parse(const string& queryText) = 0;
+			virtual ExpressionSyntaxNodePtr Parse() = 0;
+
+			virtual ExpressionSyntaxNodePtr Parse(const ILexerPtr& iLexerPtr)
+			{
+				ExpressionSyntaxNodePtr nullExpressionPtr{};
+				return nullExpressionPtr;
+			};
 		};
 	}
 }

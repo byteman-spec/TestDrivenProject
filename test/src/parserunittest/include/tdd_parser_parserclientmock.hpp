@@ -9,20 +9,20 @@ Header for lexer created 																		##
 #include <string>
 #include <vector>
 #include "../../../../src/parser/include/tdd_parser_iparser.hpp"
+#include "../../lexerunittest/include/tdd_lexertest_lexerclientmock.hpp"
 #include <gmock/gmock.h>
 
 using namespace std;
+using namespace TDD::Parser;
+using namespace TDD::LexerUnitTest;
 
 namespace TDD {
 
 	namespace ParserUnitTest {
-		class ExpressionSyntaxNode;
-
 		class ParserClientMock : IParser
 		{
-
 		public:
-			MOCK_METHOD(ExpressionSyntaxNode, Parse, (const string& queryText), (override));
+			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (const ILexerPtr& iLexerPtr), (override));
 		};
 	}
 }

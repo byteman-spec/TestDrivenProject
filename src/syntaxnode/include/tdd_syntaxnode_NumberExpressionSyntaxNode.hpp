@@ -44,6 +44,18 @@ namespace TDD {
 				return childrenList;
 			}
 
+			bool operator==(const ISyntaxNode& baseSyntaxNode) const override
+			{
+				if (*m_numberSyntaxToken == baseSyntaxNode)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
 
 		};
 	}

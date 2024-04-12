@@ -34,6 +34,11 @@ namespace TDD {
 				return emptyList;
 			};
 
+			virtual string GetQueryString() const
+			{
+				return "";
+			}
+
 		};
 	}
 }
