@@ -26,7 +26,9 @@ using namespace TDD::LexerUnitTest;
 using namespace TDD::SyntaxNode;
 using namespace TDD::Parser;
 using namespace TDD::Utils::Comparator;
-
+vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_leftList;
+vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_operatorTokenList;
+vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_rightList;
 
 namespace TDD {
 
@@ -49,6 +51,7 @@ namespace TDD {
 									{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3") } };
 
 				EXPECT_CALL(*m_mockLexer, Init(inputQuery,true)).Times(AtLeast(1)).WillOnce(Return(expectedResult));
+				EXPECT_CALL(*m_mockLexer, GetQueryString()).Times(AtLeast(1)).WillOnce(Return(inputQuery));
 
 			}
 			void TearDown()
@@ -70,6 +73,7 @@ namespace TDD {
 			
 			ParserClientPtr  parserClientPtr = make_shared<ParserClient>(m_castedLexerPtr);
 			auto procResult = parserClientPtr->Parse();
+			auto x=procResult->GetChildren();
 			//BinaryExpressionSyntaxNode expectedResult(left, SyntaxToken(SyntaxKind::PlusToken, 3, "+"), NumberExpressionSyntaxNode(3));
 
 			//ParserClient parser(inputQuery);

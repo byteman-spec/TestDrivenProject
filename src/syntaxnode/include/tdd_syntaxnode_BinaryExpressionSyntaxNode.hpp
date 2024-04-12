@@ -27,7 +27,10 @@ namespace TDD {
 			ExpressionSyntaxNodePtr m_right;
 			SyntaxTokenPtr m_operatorSyntaxToken;
 		public:
-			
+			static vector <ISyntaxNodePtr> m_leftList;
+			static vector <ISyntaxNodePtr> m_operatorTokenList;
+			static vector <ISyntaxNodePtr> m_rightList;
+
 			BinaryExpressionSyntaxNode( ExpressionSyntaxNodePtr left, ExpressionSyntaxNodePtr right, SyntaxTokenPtr syntaxToken) : 
 				m_operatorSyntaxToken(syntaxToken), m_left (left) , m_right (right)
 			{
@@ -39,32 +42,49 @@ namespace TDD {
 				return SyntaxKind::BinaryExpressionSyntaxNodeToken;
 			}
 
+			void InitiateChildrenList()
+			{
+
+				m_leftList = m_left->GetChildren();
+				if (GetKind() == SyntaxKind::BinaryExpressionSyntaxNodeToken)
+				{
+					m_operatorTokenList.clear();
+					m_rightList.clear();
+				}
+				m_operatorTokenList.emplace_back(m_operatorSyntaxToken);
+				if (GetKind() == SyntaxKind::BinaryExpressionSyntaxNodeToken)
+				{
+					m_rightList.clear();
+				}
+				m_rightList = m_right->GetChildren();
+			}
+
 			vector<ISyntaxNodePtr> GetChildren() override
 			{
-				vector <ISyntaxNodePtr> left = m_left->GetChildren();
-				vector <ISyntaxNodePtr> operatorToken = m_operatorSyntaxToken->GetChildren();
-				vector <ISyntaxNodePtr> right = m_right->GetChildren();
-
-				left.insert(left.end(), operatorToken.begin(), operatorToken.end());
-				left.insert(left.end(), right.begin(), right.end());
-				return left;
+				InitiateChildrenList();
+				m_leftList.insert(m_leftList.end(), m_operatorTokenList.begin(), m_operatorTokenList.end());
+				m_leftList.insert(m_leftList.end(), m_rightList.begin(), m_rightList.end());
+				return m_leftList;
 			}
 
 			bool operator==(const ISyntaxNode& baseSyntaxNode) const override
 			{
-				//if (*m_numberSyntaxToken == baseSyntaxNode)
-				//{
-				//	return true;
-				//}
-				//else
-				//{
-				//	return false;
-				//}
-
-				return true;
+				if (const BinaryExpressionSyntaxNode* castedBinarySyntaxExpressionToken = static_cast<const BinaryExpressionSyntaxNode*>(&baseSyntaxNode))
+				{
+					//if (m_left == castedBinarySyntaxExpressionToken->m_left &&
+					//	m_operatorSyntaxToken == castedBinarySyntaxExpressionToken->m_operatorSyntaxToken &&
+					//	m_operatorSyntaxToken == castedBinarySyntaxExpressionToken->m_right)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					return false;
+				}
 			}
-
 		};
 	}
 }
+   
 #endif // !TDD_SYNTAXNODE_BINARYEXPRESSIONSYNTAXNODE_HPP

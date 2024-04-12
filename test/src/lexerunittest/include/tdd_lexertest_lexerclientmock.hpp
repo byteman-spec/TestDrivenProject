@@ -25,6 +25,8 @@ namespace TDD {
 		public:
 			MOCK_METHOD(SyntaxTokenList, Init,(), (override));
 
+			MOCK_METHOD(string, GetQueryString,(),(const override));
+
 			MOCK_METHOD(SyntaxTokenList, Init, (const string& queryText, bool force ), (override));
 
 		};

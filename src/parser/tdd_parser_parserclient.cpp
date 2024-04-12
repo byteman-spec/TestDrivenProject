@@ -63,7 +63,7 @@ ParserClient::ParserClient(ILexerPtr lexer) : m_lexer(lexer)
 {
 	m_position = 0;
 	m_queryText = m_lexer->GetQueryString();
-	m_syntaxTokenPtrs = m_lexer->Init();
+	m_syntaxTokenPtrs = m_lexer->Init(m_queryText,true);
 }
 
 ExpressionSyntaxNodePtr ParserClient::Parse()
