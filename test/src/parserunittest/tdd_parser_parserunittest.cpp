@@ -49,7 +49,6 @@ namespace TDD {
 									{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3") } };
 
 				EXPECT_CALL(*m_mockLexer, Init(inputQuery,true)).Times(AtLeast(1)).WillOnce(Return(expectedResult));
-				EXPECT_CALL(*m_mockLexer, GetQueryString()).Times(AtLeast(1)).WillOnce(Return(inputQuery));
 
 			}
 			void TearDown()
@@ -57,10 +56,11 @@ namespace TDD {
 			}
 		};
 
-		TEST_F(ParserTest, LEXER_TEST_1_ADD_2_MUL_3)
+		TEST_F(ParserTest, PARSER_TEST_1_ADD_2_MUL_3)
 		{
 			//ARRANGE
 			string inputQuery = "1+2+3";
+			EXPECT_CALL(*m_mockLexer, GetQueryString()).Times(AtLeast(1)).WillOnce(Return(inputQuery));
 			vector<ISyntaxNodePtr> expectedResult{ { make_shared<BinaryExpressionSyntaxNode>
 																((make_shared<NumberExpressionSyntaxNode>
 										   									(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 0, "1")))
@@ -75,6 +75,32 @@ namespace TDD {
 			
 			ParserClientPtr  parserClientPtr = make_shared<ParserClient>(m_castedLexerPtr);
 			auto procResult = parserClientPtr->Parse();
+			//ASSERT
+			ASSERT_TRUE(ComparatorUtils<ISyntaxNodePtr>::SharedPtr_ComparatorList(procResult->GetChildren(), expectedResult));
+		};
+
+		TEST_F(ParserTest, PARSER_QUERY_TEST_1_ADD_2_MUL_3)
+		{
+			//ARRANGE
+			string inputQuery = "1+2+3";
+
+			vector<ISyntaxNodePtr> expectedResult{ { make_shared<BinaryExpressionSyntaxNode>
+																((make_shared<NumberExpressionSyntaxNode>
+																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 0, "1")))
+																,make_shared<SyntaxToken>(SyntaxKind::PlusToken,1,"+"),
+																(make_shared<NumberExpressionSyntaxNode>
+																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 2, "2")))) },
+												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,3,"+") },
+												{ (make_shared<NumberExpressionSyntaxNode>
+																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3")))} };
+
+			vector<SyntaxTokenPtr> lexerResult =  m_castedLexerPtr->Init(inputQuery,true);
+
+
+			//Parser
+
+			ParserClientPtr  parserClientPtr = make_shared<ParserClient>();
+			auto procResult = parserClientPtr->Parse(inputQuery, lexerResult,true);
 			//ASSERT
 			ASSERT_TRUE(ComparatorUtils<ISyntaxNodePtr>::SharedPtr_ComparatorList(procResult->GetChildren(), expectedResult));
 		};

@@ -66,6 +66,14 @@ ParserClient::ParserClient(ILexerPtr lexer) : m_lexer(lexer)
 	m_syntaxTokenPtrs = m_lexer->Init(m_queryText,true);
 }
 
+ParserClient::ParserClient() 
+{
+	m_position = 0;
+	m_queryText = "";
+	m_lexer = nullptr;
+	m_syntaxTokenPtrs.clear();
+}
+
 ExpressionSyntaxNodePtr ParserClient::Parse()
 {	
 	ExpressionSyntaxNodePtr left = ParsePrimaryExpression();

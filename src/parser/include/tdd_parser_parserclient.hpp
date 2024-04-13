@@ -37,6 +37,8 @@ namespace TDD {
 		public:
 			ParserClient(ILexerPtr lexer);
 
+			ParserClient();
+			
 			ExpressionSyntaxNodePtr Parse() override;
  
 			ExpressionSyntaxNodePtr Parse(const string& queryText, SyntaxTokenList tokenList, bool force = false) override;
