@@ -32,6 +32,12 @@ namespace TDD {
 			{
 				m_position = 0;
 			}
+
+			LexerClient() : m_queryText("")
+			{
+				m_position = 0;
+			}
+
 			SyntaxTokenList Init() override;
 
 			SyntaxTokenList Init(const string& queryText, bool force = false) override;

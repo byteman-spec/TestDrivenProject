@@ -101,6 +101,29 @@ namespace TDD {
 
 		};
 
+		TEST_F(LexerTest, LEXER_INIT_TEST_1_ADD_2_MUL_3)
+		{
+			//ARRANGE
+			string inputQuery = "1 + 2 * 3";
+			LexerClientPtr  lexerClientPtr = make_shared<LexerClient>();
+			vector<SyntaxTokenPtr> expectedResult{ { make_shared<SyntaxToken>(SyntaxKind::NumberToken,0,"1") },
+												{  make_shared<SyntaxToken>(SyntaxKind::WhitespaceToken,1," ") },
+												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,2,"+") },
+												{  make_shared<SyntaxToken>(SyntaxKind::WhitespaceToken,3," ") },
+												{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "2") },
+												{  make_shared<SyntaxToken>(SyntaxKind::WhitespaceToken,5," ") },
+												{  make_shared<SyntaxToken>(SyntaxKind::StarToken,6,"*") },
+												{  make_shared<SyntaxToken>(SyntaxKind::WhitespaceToken,7," ") },
+												{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 8, "3") } };
+
+			//ACT
+			vector<SyntaxTokenPtr> procResult = lexerClientPtr->Init(inputQuery,true);
+
+			//ASSERT
+			ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(procResult, expectedResult));
+
+		};
+
 	}
 }
 

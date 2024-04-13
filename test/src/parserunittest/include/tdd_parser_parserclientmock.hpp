@@ -23,6 +23,9 @@ namespace TDD {
 		{
 		public:
 			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (const ILexerPtr& iLexerPtr), (override));
+
+			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (const string& queryText, SyntaxTokenList tokenList, bool force), (override));
+
 		};
 	}
 }

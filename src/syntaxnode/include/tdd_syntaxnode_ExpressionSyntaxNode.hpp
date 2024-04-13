@@ -21,12 +21,6 @@ namespace TDD {
 		class ExpressionSyntaxNode : public ISyntaxNode
 		{
 
-		public:
-
-			 SyntaxKind GetKind() override
-			{
-				return SyntaxKind::ExpressionSyntaxNodeToken;
-			}
 		};
 	}
 }

@@ -36,7 +36,7 @@ namespace TDD {
 				static bool SharedPtr_ComparatorList( vector<T> leftPtr,  vector<T> rightPtr)
 				{
 
-					if (leftPtr.size() != leftPtr.size()) return false;
+					if (leftPtr.size() != rightPtr.size()) return false;
 					for (size_t i = 0; i < leftPtr.size(); ++i)
 					{
 						if (!SharedPtr_Comparator(leftPtr[i], rightPtr[i]))

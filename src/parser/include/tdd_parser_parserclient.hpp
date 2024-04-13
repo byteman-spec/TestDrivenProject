@@ -39,7 +39,7 @@ namespace TDD {
 
 			ExpressionSyntaxNodePtr Parse() override;
  
- 		//	ExpressionSyntaxNodePtr Parse(const ILexerPtr &iLexerPtr) override;
+			ExpressionSyntaxNodePtr Parse(const string& queryText, SyntaxTokenList tokenList, bool force = false) override;
 
 		};
 	}

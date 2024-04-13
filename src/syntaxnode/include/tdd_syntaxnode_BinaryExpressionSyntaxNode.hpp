@@ -10,7 +10,9 @@ Header for lexer created 																		##
 #include <vector>
 #include "tdd_syntaxnode_SyntaxToken.hpp"
 #include "tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+#include "../../utils/comparators/include/tdd_utils_comparator_comparatorutils.hpp"
 using namespace std;
+using namespace TDD::Utils::Comparator;
 
 namespace TDD {
 
@@ -27,11 +29,8 @@ namespace TDD {
 			ExpressionSyntaxNodePtr m_right;
 			SyntaxTokenPtr m_operatorSyntaxToken;
 		public:
-			static vector <ISyntaxNodePtr> m_leftList;
-			static vector <ISyntaxNodePtr> m_operatorTokenList;
-			static vector <ISyntaxNodePtr> m_rightList;
 
-			BinaryExpressionSyntaxNode( ExpressionSyntaxNodePtr left, ExpressionSyntaxNodePtr right, SyntaxTokenPtr syntaxToken) : 
+			BinaryExpressionSyntaxNode( ExpressionSyntaxNodePtr left,  SyntaxTokenPtr syntaxToken, ExpressionSyntaxNodePtr right) :
 				m_operatorSyntaxToken(syntaxToken), m_left (left) , m_right (right)
 			{
 
@@ -42,38 +41,48 @@ namespace TDD {
 				return SyntaxKind::BinaryExpressionSyntaxNodeToken;
 			}
 
-			void InitiateChildrenList()
+			vector<ISyntaxNodePtr> GetChildren() const override
 			{
-
-				m_leftList = m_left->GetChildren();
-				if (GetKind() == SyntaxKind::BinaryExpressionSyntaxNodeToken)
-				{
-					m_operatorTokenList.clear();
-					m_rightList.clear();
-				}
-				m_operatorTokenList.emplace_back(m_operatorSyntaxToken);
-				if (GetKind() == SyntaxKind::BinaryExpressionSyntaxNodeToken)
-				{
-					m_rightList.clear();
-				}
-				m_rightList = m_right->GetChildren();
+				vector <ISyntaxNodePtr> childrenList{};
+				childrenList.emplace_back(m_left);
+				childrenList.emplace_back(m_operatorSyntaxToken);
+				childrenList.emplace_back(m_right);
+				return childrenList;
 			}
 
-			vector<ISyntaxNodePtr> GetChildren() override
-			{
-				InitiateChildrenList();
-				m_leftList.insert(m_leftList.end(), m_operatorTokenList.begin(), m_operatorTokenList.end());
-				m_leftList.insert(m_leftList.end(), m_rightList.begin(), m_rightList.end());
-				return m_leftList;
-			}
 
 			bool operator==(const ISyntaxNode& baseSyntaxNode) const override
 			{
 				if (const BinaryExpressionSyntaxNode* castedBinarySyntaxExpressionToken = static_cast<const BinaryExpressionSyntaxNode*>(&baseSyntaxNode))
 				{
-					//if (m_left == castedBinarySyntaxExpressionToken->m_left &&
-					//	m_operatorSyntaxToken == castedBinarySyntaxExpressionToken->m_operatorSyntaxToken &&
-					//	m_operatorSyntaxToken == castedBinarySyntaxExpressionToken->m_right)
+					//if (m_left->GetKind() == SyntaxKind::NumberToken ||
+					//	m_left->GetKind() == SyntaxKind::PlusToken)
+					//{
+					//	if (m_left != castedBinarySyntaxExpressionToken->m_left)
+					//	{
+					//		return false;
+					//	}
+					//	if (m_operatorSyntaxToken != castedBinarySyntaxExpressionToken->m_operatorSyntaxToken)
+					//	{
+					//		return false;
+					//	}
+					//	if (m_right->GetKind() == SyntaxKind::NumberToken ||
+					//		m_right->GetKind() == SyntaxKind::PlusToken)
+					//	{
+					//		if (m_right != castedBinarySyntaxExpressionToken->m_right)
+					//		{
+					//			return false;
+					//		}
+					//	}
+					//}
+					//else
+					//{
+					//	ComparatorUtils<ISyntaxNodePtr>::SharedPtr_ComparatorList(GetChildren(), castedBinarySyntaxExpressionToken->GetChildren());
+					//}
+
+					if (ComparatorUtils<ExpressionSyntaxNodePtr>::SharedPtr_Comparator(m_left,castedBinarySyntaxExpressionToken->m_left)
+						&& ComparatorUtils<SyntaxTokenPtr>::SharedPtr_Comparator(m_operatorSyntaxToken, castedBinarySyntaxExpressionToken->m_operatorSyntaxToken)
+						&& ComparatorUtils<ExpressionSyntaxNodePtr>::SharedPtr_Comparator(m_right, castedBinarySyntaxExpressionToken->m_right))
 					{
 						return true;
 					}

@@ -26,9 +26,7 @@ using namespace TDD::LexerUnitTest;
 using namespace TDD::SyntaxNode;
 using namespace TDD::Parser;
 using namespace TDD::Utils::Comparator;
-vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_leftList;
-vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_operatorTokenList;
-vector <ISyntaxNodePtr> TDD::SyntaxNode::BinaryExpressionSyntaxNode::m_rightList;
+
 
 namespace TDD {
 
@@ -63,30 +61,22 @@ namespace TDD {
 		{
 			//ARRANGE
 			string inputQuery = "1+2+3";
-			vector<SyntaxTokenPtr> expectedResult{ { make_shared<SyntaxToken>(SyntaxKind::NumberToken,0,"1") },
-												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,1,"+") },
-												{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 2, "2") },
+			vector<ISyntaxNodePtr> expectedResult{ { make_shared<BinaryExpressionSyntaxNode>
+																((make_shared<NumberExpressionSyntaxNode>
+										   									(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 0, "1")))
+																,make_shared<SyntaxToken>(SyntaxKind::PlusToken,1,"+"),
+																(make_shared<NumberExpressionSyntaxNode>
+																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 2, "2")))) },
 												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,3,"+") },
-												{  make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3") } };
+												{ (make_shared<NumberExpressionSyntaxNode>
+																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3")))} };
 			
 			//Parser
 			
 			ParserClientPtr  parserClientPtr = make_shared<ParserClient>(m_castedLexerPtr);
 			auto procResult = parserClientPtr->Parse();
-			auto x=procResult->GetChildren();
-			//BinaryExpressionSyntaxNode expectedResult(left, SyntaxToken(SyntaxKind::PlusToken, 3, "+"), NumberExpressionSyntaxNode(3));
-
-			//ParserClient parser(inputQuery);
-			//BinaryExpressionSyntaxNode parsedSyntax = parser.parse();
-			
-			//ACT
-//			auto procResult = m_mockLexer.Init("1+2+3", true);
-
-			//EXPECT_EQ(parsedSyntax, expectedResult);
-			//ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(lexedResult, expectedResult));
-
 			//ASSERT
-		//	ASSERT_TRUE(ComparatorUtils<SyntaxTokenPtr>::SharedPtr_ComparatorList(procResult, expectedResult));
+			ASSERT_TRUE(ComparatorUtils<ISyntaxNodePtr>::SharedPtr_ComparatorList(procResult->GetChildren(), expectedResult));
 		};
 
 	}

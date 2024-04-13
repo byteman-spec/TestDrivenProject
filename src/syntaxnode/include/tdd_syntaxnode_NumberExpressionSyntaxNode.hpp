@@ -10,8 +10,10 @@ Header for lexer created 																		##
 #include <vector>
 #include "tdd_syntaxnode_SyntaxToken.hpp"
 #include "tdd_syntaxnode_ExpressionSyntaxNode.hpp"
+#include "../../utils/comparators/include/tdd_utils_comparator_comparatorutils.hpp"
 
 using namespace std;
+using namespace TDD::Utils::Comparator;
 
 namespace TDD {
 
@@ -27,17 +29,17 @@ namespace TDD {
 			SyntaxTokenPtr m_numberSyntaxToken;
 		public:
 			
-			NumberExpressionSyntaxNode(const SyntaxTokenPtr syntaxToken) : m_numberSyntaxToken(syntaxToken)
+			NumberExpressionSyntaxNode(SyntaxTokenPtr syntaxToken) : m_numberSyntaxToken(syntaxToken)
 			{
 
 			}
 
 			SyntaxKind GetKind() override
 			{
-				return SyntaxKind::ExpressionSyntaxNodeToken;
+				return SyntaxKind::NumberExpressionSyntaxNodeToken;
 			}
 
-			vector<ISyntaxNodePtr> GetChildren() override
+			vector<ISyntaxNodePtr> GetChildren() const override
 			{
 				vector<ISyntaxNodePtr> childrenList;
 				childrenList.emplace_back(m_numberSyntaxToken);
@@ -46,14 +48,18 @@ namespace TDD {
 
 			bool operator==(const ISyntaxNode& baseSyntaxNode) const override
 			{
-				if (*m_numberSyntaxToken == baseSyntaxNode)
+				if (const NumberExpressionSyntaxNode* castedNumberExpressionSyntaxNode = static_cast<const NumberExpressionSyntaxNode*>(&baseSyntaxNode))
 				{
-					return true;
+					if (ComparatorUtils<SyntaxTokenPtr>::SharedPtr_Comparator(m_numberSyntaxToken, castedNumberExpressionSyntaxNode->m_numberSyntaxToken))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
-				else
-				{
-					return false;
-				}
+				return false;
 			}
 
 

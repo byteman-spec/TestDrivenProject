@@ -74,7 +74,7 @@ ExpressionSyntaxNodePtr ParserClient::Parse()
 	{
 		SyntaxTokenPtr operatorToken = GetCurrentInc();
 		ExpressionSyntaxNodePtr right = ParsePrimaryExpression();
-		auto temp = make_shared<BinaryExpressionSyntaxNode>(left, right,operatorToken);
+		auto temp = make_shared<BinaryExpressionSyntaxNode>(left,operatorToken,right);
 		left = temp;
 	}
 	return left;
@@ -84,4 +84,19 @@ ExpressionSyntaxNodePtr ParserClient::ParsePrimaryExpression()
 {
 	SyntaxTokenPtr numberSyntaxToken = Match(SyntaxKind::NumberToken);
 	return make_shared<NumberExpressionSyntaxNode>(numberSyntaxToken);
+}
+
+ExpressionSyntaxNodePtr ParserClient::Parse(const string& queryText, SyntaxTokenList tokenList ,bool force)
+{
+	if ((m_queryText.empty() && m_syntaxTokenPtrs.empty() )|| force)
+	{
+		m_queryText = queryText;
+		m_position = 0;
+		m_syntaxTokenPtrs = tokenList;
+		return Parse();
+	}
+	else
+	{
+		return Parse();
+	}
 }

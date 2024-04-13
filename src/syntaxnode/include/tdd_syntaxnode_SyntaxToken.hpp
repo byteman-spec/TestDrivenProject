@@ -26,8 +26,6 @@ namespace TDD {
 			CloseParanthesisToken,
 			SlashToken,
 			InvalidToken,
-			SyntaxNodeToken,
-			ExpressionSyntaxNodeToken,
 			NumberExpressionSyntaxNodeToken,
 			BinaryExpressionSyntaxNodeToken
 		};
@@ -39,12 +37,9 @@ namespace TDD {
 
 		public:
 
-			virtual SyntaxKind GetKind()
-			{
-				return SyntaxKind::SyntaxNodeToken;
-			}
+			virtual SyntaxKind GetKind() = 0;
 
-			virtual vector<ISyntaxNodePtr> GetChildren() = 0;
+			virtual vector<ISyntaxNodePtr> GetChildren() const = 0;
 
 			virtual bool operator==(const ISyntaxNode& other) const {
 				return true;
@@ -72,7 +67,7 @@ namespace TDD {
 				return m_syntaxKind;
 			}
 
-			vector<ISyntaxNodePtr> GetChildren() override
+			vector<ISyntaxNodePtr> GetChildren()const override
 			{
 				return vector<ISyntaxNodePtr>{};
 			}

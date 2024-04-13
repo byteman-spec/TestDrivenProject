@@ -32,6 +32,12 @@ namespace TDD {
 				ExpressionSyntaxNodePtr nullExpressionPtr{};
 				return nullExpressionPtr;
 			};
+
+			virtual ExpressionSyntaxNodePtr Parse(const string& queryText, SyntaxTokenList tokenList, bool force = false)
+			{
+				ExpressionSyntaxNodePtr nullExpressionPtr{};
+				return nullExpressionPtr;
+			};
 		};
 	}
 }
