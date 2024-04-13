@@ -9,6 +9,7 @@ Header for lexer created 																		##
 #include <string>
 #include <vector>
 #include <memory>
+#include <map>
 using namespace std;
 
 namespace TDD {
@@ -29,6 +30,21 @@ namespace TDD {
 			NumberExpressionSyntaxNodeToken,
 			BinaryExpressionSyntaxNodeToken
 		};
+
+		static map<SyntaxKind, string> syntaxKindMap{
+			{NumberToken, "NumberToken"},
+			{WhitespaceToken, "WhitespaceToken"},
+			{PlusToken, "PlusToken"},
+			{HyphenToken, "MinusToken"},
+			{StarToken, "StarToken"},
+			{EndOfFileToken, "EndOfFileToken"},
+			{OpenParanthesisToken, "OpenParanthesisToken"},
+			{CloseParanthesisToken, "CloseParanthesisToken"},
+			{SlashToken, "DivideToken"},
+			{InvalidToken, "InvalidToken"},
+			{NumberExpressionSyntaxNodeToken, "NumberExpression"},
+			{BinaryExpressionSyntaxNodeToken, "BinaryExpression"},
+		};
 		class ISyntaxNode;
 		using ISyntaxNodePtr = std::shared_ptr<ISyntaxNode>;
 
@@ -40,7 +56,10 @@ namespace TDD {
 			virtual SyntaxKind GetKind() = 0;
 
 			virtual vector<ISyntaxNodePtr> GetChildren() const = 0;
-
+			virtual string GetKindString() 
+			{
+				return syntaxKindMap[GetKind()];
+			}
 			virtual bool operator==(const ISyntaxNode& other) const {
 				return true;
 			}
@@ -61,6 +80,11 @@ namespace TDD {
 			{
 
 			};
+
+			string GetValue()
+			{
+				return m_text;
+			}
 
 			SyntaxKind GetKind()
 			{

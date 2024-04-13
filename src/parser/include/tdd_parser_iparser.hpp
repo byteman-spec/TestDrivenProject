@@ -20,12 +20,19 @@ using namespace TDD::Lexer;
 namespace TDD {
 
 	namespace Parser {
-		
+
+		class IParser;
+		using IParserPtr = shared_ptr<IParser>;
+
 		class IParser
 		{
 		public:
 
-			virtual ExpressionSyntaxNodePtr Parse() = 0;
+			virtual ExpressionSyntaxNodePtr Parse()
+			{
+				ExpressionSyntaxNodePtr nullExpressionPtr{};
+				return nullExpressionPtr;
+			};
 
 			virtual ExpressionSyntaxNodePtr Parse(const ILexerPtr& iLexerPtr)
 			{
@@ -38,6 +45,7 @@ namespace TDD {
 				ExpressionSyntaxNodePtr nullExpressionPtr{};
 				return nullExpressionPtr;
 			};
+			
 		};
 	}
 }

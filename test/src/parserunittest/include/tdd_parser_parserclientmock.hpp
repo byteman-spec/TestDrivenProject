@@ -19,10 +19,14 @@ using namespace TDD::LexerUnitTest;
 namespace TDD {
 
 	namespace ParserUnitTest {
-		class ParserClientMock : IParser
+		class ParserClientMock;
+		using ParserClientMockPtr = shared_ptr<ParserClientMock>;
+		class ParserClientMock : public IParser
 		{
 		public:
 			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (const ILexerPtr& iLexerPtr), (override));
+
+			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (), (override));
 
 			MOCK_METHOD(ExpressionSyntaxNodePtr, Parse, (const string& queryText, SyntaxTokenList tokenList, bool force), (override));
 

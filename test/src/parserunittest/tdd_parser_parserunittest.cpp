@@ -1,4 +1,4 @@
-/*################################################################################################
+﻿/*################################################################################################
 Interface for dbclient created for GtestMocking													##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
@@ -95,7 +95,6 @@ namespace TDD {
 																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3")))} };
 
 			vector<SyntaxTokenPtr> lexerResult =  m_castedLexerPtr->Init(inputQuery,true);
-
 
 			//Parser
 
