@@ -1,8 +1,10 @@
 /*################################################################################################
-Header for lexer created 																		##
+#Header for NumberExpressionSyntaxNode															##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for lexer				       			    ##
+#08-Apr-2024				byteman-spec	Header for NumberExpressionSyntaxNode				##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_SYNTAXNODE_NUMBEREXPRESSIONSYNTAXNODE_HPP
 #define	TDD_SYNTAXNODE_NUMBEREXPRESSIONSYNTAXNODE_HPP

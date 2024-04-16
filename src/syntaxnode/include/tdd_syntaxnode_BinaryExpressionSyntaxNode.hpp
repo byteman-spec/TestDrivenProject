@@ -1,8 +1,10 @@
 /*################################################################################################
-Header for lexer created 																		##
+#Header for BinaryExpressionSyntaxNode															##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for lexer				       			    ##
+#08-Apr-2024				byteman-spec	Header for BinaryExpressionSyntaxNode				##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_SYNTAXNODE_BINARYEXPRESSIONSYNTAXNODE_HPP
 #define	TDD_SYNTAXNODE_BINARYEXPRESSIONSYNTAXNODE_HPP
@@ -55,31 +57,6 @@ namespace TDD {
 			{
 				if (const BinaryExpressionSyntaxNode* castedBinarySyntaxExpressionToken = static_cast<const BinaryExpressionSyntaxNode*>(&baseSyntaxNode))
 				{
-					//if (m_left->GetKind() == SyntaxKind::NumberToken ||
-					//	m_left->GetKind() == SyntaxKind::PlusToken)
-					//{
-					//	if (m_left != castedBinarySyntaxExpressionToken->m_left)
-					//	{
-					//		return false;
-					//	}
-					//	if (m_operatorSyntaxToken != castedBinarySyntaxExpressionToken->m_operatorSyntaxToken)
-					//	{
-					//		return false;
-					//	}
-					//	if (m_right->GetKind() == SyntaxKind::NumberToken ||
-					//		m_right->GetKind() == SyntaxKind::PlusToken)
-					//	{
-					//		if (m_right != castedBinarySyntaxExpressionToken->m_right)
-					//		{
-					//			return false;
-					//		}
-					//	}
-					//}
-					//else
-					//{
-					//	ComparatorUtils<ISyntaxNodePtr>::SharedPtr_ComparatorList(GetChildren(), castedBinarySyntaxExpressionToken->GetChildren());
-					//}
-
 					if (ComparatorUtils<ExpressionSyntaxNodePtr>::SharedPtr_Comparator(m_left,castedBinarySyntaxExpressionToken->m_left)
 						&& ComparatorUtils<SyntaxTokenPtr>::SharedPtr_Comparator(m_operatorSyntaxToken, castedBinarySyntaxExpressionToken->m_operatorSyntaxToken)
 						&& ComparatorUtils<ExpressionSyntaxNodePtr>::SharedPtr_Comparator(m_right, castedBinarySyntaxExpressionToken->m_right))
