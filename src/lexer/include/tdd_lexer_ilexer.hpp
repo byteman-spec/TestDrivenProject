@@ -8,15 +8,16 @@ Interface for lexer created 																	##
 #define	TDD_LEXER_ILEXER_HPP
 #include <string>
 #include <vector>
+#include "../../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
 
 using namespace std;
+using namespace TDD::SyntaxNode;
 
 namespace TDD {
 
 	namespace Lexer {
-
-		class SyntaxToken;
-		using SyntaxTokenList = vector<SyntaxToken>;
+		class ILexer;
+		using ILexerPtr = shared_ptr<ILexer>;
 
 		class ILexer
 		{
@@ -26,6 +27,17 @@ namespace TDD {
 				SyntaxTokenList emptyList{};
 				return emptyList;
 			};
+
+			virtual SyntaxTokenList Init(const string& queryText, bool force = false)
+			{
+				SyntaxTokenList emptyList{};
+				return emptyList;
+			};
+
+			virtual string GetQueryString() const
+			{
+				return "";
+			}
 
 		};
 	}
