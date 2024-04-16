@@ -1,8 +1,10 @@
 /*################################################################################################
-Header for lexer created 																		##
+#Header for Lexer implementing ILexer															##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
 #08-Apr-2024				byteman-spec	Header for lexer				       			    ##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_LEXER_LEXERCLIENT_HPP
 #define	TDD_LEXER_LEXERCLIENT_HPP

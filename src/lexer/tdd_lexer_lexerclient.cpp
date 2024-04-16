@@ -1,8 +1,10 @@
 /*################################################################################################
-Header for lexer created 																		##
+#Implementation class for Lexer																	##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for lexer				       			    ##
+#08-Apr-2024				byteman-spec	Implementation for lexer				       		##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "include/tdd_lexer_lexerclient.hpp"
 #include "../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"

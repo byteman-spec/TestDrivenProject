@@ -1,8 +1,10 @@
 /*################################################################################################
-Interface for dbclient created for GtestMocking													##
+#Unit test for IDBClient																		##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Interface for dbclient created for GtestMocking     ##
+#08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

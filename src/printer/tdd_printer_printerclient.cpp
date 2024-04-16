@@ -1,8 +1,10 @@
 ﻿/*################################################################################################
-Header for lexer created 																		##
+#Implementation class for Printer	 															##
+#																								##
 #HISTORY																						##
 #DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for lexer				       			    ##
+#08-Apr-2024				byteman-spec	Implementation for Printer		  					##
+#14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "include/tdd_printer_printerclient.hpp"
 #include "../parser/include/tdd_parser_parserclient.hpp"
