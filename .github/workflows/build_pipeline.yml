@@ -26,6 +26,7 @@ jobs:
     - name: make
       run: | 
         make -C build
+        cd build
         ls
 
     - name: run tests
