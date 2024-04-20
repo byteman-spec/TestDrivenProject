@@ -20,7 +20,7 @@ REM Set your input parameter name
 set INPUT_NAME=branch
 
 REM Accept input value as a parameter
-set INPUT_VALUE=%1
+set INPUT_VALUE=%1Valid
 
 REM Trigger the workflow using cURL
 curl -X POST ^
