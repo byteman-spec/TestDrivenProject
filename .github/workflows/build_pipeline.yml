@@ -56,4 +56,5 @@ jobs:
         git push -u origin ${{ github.event.inputs.branch }}
     env:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
+        PAT_TOKEN: ${{ secrets.GIT_TOKEN }}
     
