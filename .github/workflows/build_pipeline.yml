@@ -25,4 +25,5 @@ jobs:
         ls
         
     - name: make
-      run: make -C build
+      run: |
+        ls
