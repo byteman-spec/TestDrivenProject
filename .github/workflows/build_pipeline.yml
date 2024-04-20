@@ -64,6 +64,7 @@ jobs:
         git switch -c ${{ github.event.inputs.branchOutput }}
         git pull origin ${{ github.event.inputs.branchInput }} --commit -m "[b-spec_action]Merge remote-tracking branch "
         git push -u origin ${{ github.event.inputs.branchOutput }}
+        
     env:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
     
