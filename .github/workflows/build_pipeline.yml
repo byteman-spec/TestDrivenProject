@@ -22,9 +22,9 @@ jobs:
         mkdir build
         cd build
         cmake ..
-        ls
-        
+
     - name: make
-      run: |
-        cd build
-        ls
+      run: make -C build
+
+    - name: run tests
+      run: ctest
