@@ -89,7 +89,7 @@ namespace TDD {
 																,make_shared<SyntaxToken>(SyntaxKind::PlusToken,1,"+"),
 																(make_shared<NumberExpressionSyntaxNode>
 																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 2, "2")))) },
-												{  make_shared<SyntaxToken>(SyntaxKind::PlusToken,3,"+") },
+												{  make_shared<SyntaxToken>(SyntaxKind::StarToken,3,"+") },
 												{ (make_shared<NumberExpressionSyntaxNode>
 																			(make_shared<SyntaxToken>(SyntaxKind::NumberToken, 4, "3")))} };
 
