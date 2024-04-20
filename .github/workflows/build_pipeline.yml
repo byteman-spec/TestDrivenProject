@@ -26,4 +26,5 @@ jobs:
         
     - name: make
       run: |
+        cd build
         ls
