@@ -53,7 +53,7 @@ jobs:
         git remote add destination https://github.com/byteman-spec/TestDrivenProject.git
         git config --global user.email "explodefromdelhi@github.com"
         git config --global user.name "b-spec-actions"
-        echo0 "${{ secrets.GIT_TOKEN }}"
+        echo "${{ secrets.GIT_TOKEN }}"
         git push -u origin ${{ github.event.inputs.branch }}
     env:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
