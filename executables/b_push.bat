@@ -34,8 +34,8 @@ if "%ACCESS_TOKEN%"=="" (
 set INPUT_NAME_1=branchInput
 set INPUT_NAME_2=branchOutput
 
-set INPUT_VALUE=%1
-set INPUT_VALUE_@=%1Valid
+set INPUT_VALUE_1=%1
+set INPUT_VALUE_2=%1Valid
 
 echo curl -X POST ^
   -H "Authorization: token !ACCESS_TOKEN!" ^
