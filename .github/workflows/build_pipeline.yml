@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: build_pipeline
 
 on:
   workflow_dispatch:
