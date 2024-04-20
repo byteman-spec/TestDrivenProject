@@ -24,7 +24,10 @@ jobs:
         cmake ..
 
     - name: make
-      run: make -C build
+      run: | 
+        cd build
+        make -C build
+        ls
 
     - name: run tests
       run: ctest
