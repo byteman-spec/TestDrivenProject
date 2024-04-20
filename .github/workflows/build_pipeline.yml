@@ -58,6 +58,9 @@ jobs:
         submodules: recursive
 
     - name: Push to input repository
+      env:
+        GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
         git config --global user.email "explodefromdelhi@github.com"
         git config --global user.name "byteman-spec"
@@ -66,6 +69,4 @@ jobs:
         git switch -c ${{ github.event.inputs.branchOutput }}
         git push -f origin ${{ github.event.inputs.branchOutput }}
         
-    env:
-        GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
-    
+
