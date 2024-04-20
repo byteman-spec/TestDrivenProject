@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION "3.20.21")
 
-set(This TestLib)
+set(This CompilerTests)
 project(${This} C CXX)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -16,6 +16,7 @@ target_link_libraries(${This} PUBLIC
 	GTest::gmock_main
 	TestDrivenProject
 )
+enable_testing()
 
 add_test(
 	NAME ${This}
