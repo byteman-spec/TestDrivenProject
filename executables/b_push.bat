@@ -31,9 +31,11 @@ if "%ACCESS_TOKEN%"=="" (
     exit /b 1
 )
 
-set INPUT_NAME=branch
+set INPUT_NAME_1=branchInput
+set INPUT_NAME_2=branchOutput
 
-set INPUT_VALUE=%1Valid
+set INPUT_VALUE=%1
+set INPUT_VALUE_@=%1Valid
 
 echo curl -X POST ^
   -H "Authorization: token !ACCESS_TOKEN!" ^
@@ -47,7 +49,7 @@ curl -X POST ^
   -H "Authorization: token %ACCESS_TOKEN%" ^
   -H "Accept: application/vnd.github.v3+json" ^
   https://api.github.com/repos/%GIT_USERNAME%/%PROJECT_NAME%/actions/workflows/%WORKFLOW_NAME%/dispatches ^
-  -d "{\"ref\":\"main\", \"inputs\": {\"!INPUT_NAME!\": \"!INPUT_VALUE!\"}}"
+  -d "{\"ref\":\"main\", \"inputs\": {\"!INPUT_NAME_1!\": \"!INPUT_VALUE_1!\",\"!INPUT_NAME_2!\": \"!INPUT_VALUE_2!\"}}"
 
 
 endlocal
