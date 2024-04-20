@@ -7,15 +7,15 @@ if "%1"=="-h" (
     echo code through the validation pipeline.
     echo Code is only pushed after the pipeline passes.
     echo Sample Usage	
-    echo b_push ^<branch_name^> ^<GIT_username^> ^<PAT_token^>	
+    echo b_push ^<branch_name^> ^<PAT_token^>	
     exit /b 1
 )
 
-set GIT_USERNAME=%2
+set GIT_USERNAME=byteman-spec
 set BRANCH_NAME=%1
 set PROJECT_NAME=TestDrivenProject
 set WORKFLOW_NAME=94615098
-set ACCESS_TOKEN=%3
+set ACCESS_TOKEN=%2
 
 
 if "%BRANCH_NAME%"=="" (
