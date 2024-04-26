@@ -1,11 +1,16 @@
-// GoogleTestClone.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*####################################################################################################
+## Main function for the compiler																	##
+##																									##
+## HISTORY																							##
+## Date						#USERNAME		#DESC													##
+## 08-Apr-2024				byteman-spec	Initial Creation							       		##
+#####################################################################################################*/
 
-//#include <iostream>
-//int main()
-//{
-////    std::cout << "Hello World!\n";
-//}
+#include <iostream>
+int main()
+{
+//    std::cout << "Hello World!\n";
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

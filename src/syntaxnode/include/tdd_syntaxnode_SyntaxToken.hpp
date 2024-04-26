@@ -1,10 +1,10 @@
 /*################################################################################################
-#Header for SyntaxTokens																		##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for SyntaxTokens								##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header for SyntaxTokens																		##
+## 																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Header for SyntaxTokens								##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_SYNTAXNODE_SYNTAXTOKEN_HPP
 #define	TDD_SYNTAXNODE_SYNTAXTOKEN_HPP

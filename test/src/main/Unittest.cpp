@@ -1,9 +1,13 @@
-// GoogleTestClone.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*####################################################################################################
+## Main function for the compiler																	##
+##																									##
+## HISTORY																							##
+## Date						#USERNAME		#DESC													##
+## 08-Apr-2024				byteman-spec	Initial Creation							       		##
+#####################################################################################################*/
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include "../../../src/main/GoogleTestClone.cpp"
 
 //TEST(UnitTestSuite, TestAssert)
 //{
@@ -25,5 +29,7 @@
 int main(int argc_, char** argv)
 {
 	testing::InitGoogleTest(&argc_, argv);
+	
+	testing::GTEST_FLAG(filter) = "LexerTest.*:ParserTest.*:PrinterTest.*";
 	return RUN_ALL_TESTS();
 }

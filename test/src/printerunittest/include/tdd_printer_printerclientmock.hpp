@@ -1,10 +1,10 @@
 /*################################################################################################
-#Header to mock IPrinterClient																	##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Initial Creation								    ##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header to mock IPrinterClient																##
+## 																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Initial Creation								    ##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_PRINTERUNITTEST_PRINTERCLIENTMOCK_HPP
 #define	TDD_PRINTERUNITTEST_PRINTERCLIENTMOCK_HPP

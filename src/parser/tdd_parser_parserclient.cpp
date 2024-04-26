@@ -1,10 +1,10 @@
 /*################################################################################################
-#Implementation class for Parser		 														##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Implementation of parser			       			##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+##Implementation class for Parser		 														##
+##																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Implementation of parser			       			##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "include/tdd_parser_parserclient.hpp"
 #include "../syntaxnode/include/tdd_syntaxnode_SyntaxToken.hpp"
