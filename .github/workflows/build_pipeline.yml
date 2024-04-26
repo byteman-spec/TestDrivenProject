@@ -56,8 +56,6 @@ jobs:
         git config --global user.name "byteman-spec"
         git switch -c ${{ github.event.inputs.branchInput }}
         git pull origin ${{ github.event.inputs.branchInput }} 
-        git diff origin/main
-        git diff origin/main | grep -E "^+++ b|^[+-]#{1,2} [0-9]"
         git diff origin/main | grep -E "^+++ b"
         
 
