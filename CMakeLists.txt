@@ -51,4 +51,5 @@ add_library(${This} STATIC ${SRC_FILES} ${HEADER_FILES})
 enable_testing()
 
 add_subdirectory(test)
+add_subdirectory(ind/sanitizer)
 #including third party libraries

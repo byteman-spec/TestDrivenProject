@@ -6,11 +6,13 @@
 ## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
 ## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
-#ifndef IND_SANITIZER_ISANITIZER_HPP
-#define	IND_SANITIZER_ISANITIZER_HPP
+#ifndef IND_SANITIZER_HISTORYSANITIZER_HPP
+#define	IND_SANITIZER_HISTORYSANITIZER_HPP
 
+#include "ind_sanitizer_isanitizer.hpp"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <vector>
 #include <string>
 
 using namespace testing;
@@ -24,16 +26,20 @@ namespace IND {
 
 	namespace SANITIZER {
 
-		class ISanitizer {
+		class HistorySanitizer;
+		using HistorySanitizerPtr = shared_ptr<HistorySanitizer>;
+		class HistorySanitizer : public ISanitizer {
 		
 		public:
-			bool Sanitize() const = 0;
+			HistorySanitizer(const char* fileString, bool isPath);
+
+			bool Sanitize(vector<string>& invalidFiles) const override;
 		};
 
 	}
 }
 
 
-#endif // !IND_SANITIZER_ISANITIZER_HPP
+#endif // !IND_SANITIZER_HISTORYSANITIZER_HPP
 
 

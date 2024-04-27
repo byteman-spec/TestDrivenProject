@@ -6,6 +6,7 @@
 ## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
 ## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
+#include "../../src/include/ind_sanitizer_historysanitizer.hpp"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <string>
@@ -16,20 +17,14 @@ using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
 using namespace std;
+using namespace IND::SANITIZER;
 
 
 namespace TDD {
 
-	namespace DBCLIENTTEST {
+	namespace SANITIZER {
 		
-		class MockDBClient : public DBCLIENT::IDbClient {
-		public:
-			MOCK_METHOD0(checkhealth, int());
-			MOCK_METHOD1(logout, bool (string username));
-			MOCK_METHOD2(login, bool (string username, string password));
-		};
-
-		struct DbClientTest : public testing::Test
+		struct HistorySanitizerTest : public testing::Test
 		{			
 			void SetUp()
 			{
@@ -39,18 +34,33 @@ namespace TDD {
 			}
 		};
 
-		TEST_F(DbClientTest, LOGIN_VALIDCREDS)
+		TEST_F(HistorySanitizerTest, SANITIZE_HISTORY_FAIL)
 		{
 			//ARRANGE
-			MockDBClient mockDbClient;
-			TDD::DBCLIENT::DbConnector dbConnector(mockDbClient);
-			EXPECT_CALL(mockDbClient, login("byteman-spec", "adminriot")).Times(AtLeast(1)).WillOnce(Return(true));
+			vector<string> invalidFileList{};
+			const char* resultantTree = R"(
++++ b/CMakeLists.txt
++++ b/ind/b_push.bat
++++ b/ind/sanitizer/CMakeLists.txt
++++ b/ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp
++## 08-Apr-2024				byteman-spec	Initial Creation								    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/src/historysanitizer/tdd_lexer_lexerunittest.cpp
++## 08-Apr-2024				byteman-spec	Unit test for ILexerClient						    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/src/isanitizer/ind_sanitizer_isanitizer.hpp
++## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/test/historysanitizerunittest/include/ind_historysanitizer_mockhistorysanitizer.hpp
++## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
+)";
 			
 			//ACT
-			int connectionSuccess = dbConnector.Init("byteman-spec", "adminriot");
-			
+			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(resultantTree, false);
+			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
 			//ASSERT
-			EXPECT_EQ(connectionSuccess, 0);
+			EXPECT_EQ(sanity, false);
 
 		};
 
