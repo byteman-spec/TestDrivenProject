@@ -29,9 +29,10 @@ namespace IND {
 		class HistorySanitizer;
 		using HistorySanitizerPtr = shared_ptr<HistorySanitizer>;
 		class HistorySanitizer : public ISanitizer {
-		
+
+			char* m_filePath;
 		public:
-			HistorySanitizer(const char* fileString, bool isPath);
+			HistorySanitizer(char* filePath);
 
 			bool Sanitize(vector<string>& invalidFiles) const override;
 		};

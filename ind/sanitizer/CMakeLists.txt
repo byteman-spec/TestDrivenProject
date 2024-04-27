@@ -4,6 +4,15 @@ set(This SanitizerTests)
 project(${This} C CXX)
 set(CMAKE_CXX_STANDARD 17)
 
+set (HISTORY_SANITIZER_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set (HISTORY_SANITIZER_SAMPLE_DIFF_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/historysanitizerunittest/SampleDiff.txt")
+
+set(CONFIG_TEMPLATE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/config")
+set(CONFIG_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/config")
+configure_file("${CONFIG_TEMPLATE_DIR}/config.h.in" "${CONFIG_OUTPUT_DIR}/config.h" @ONLY)
+
+
+
 #include header and source files to executable
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" )
 file(GLOB_RECURSE TEST_SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp" )

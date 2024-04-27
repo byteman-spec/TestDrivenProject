@@ -7,6 +7,7 @@
 ## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "../../src/include/ind_sanitizer_historysanitizer.hpp"
+#include "../../src/config/config.h"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <string>
@@ -38,7 +39,7 @@ namespace TDD {
 		{
 			//ARRANGE
 			vector<string> invalidFileList{};
-			const char* resultantTree = R"(
+			char* resultantTree = R"(
 +++ b/CMakeLists.txt
 +++ b/ind/b_push.bat
 +++ b/ind/sanitizer/CMakeLists.txt
@@ -55,9 +56,10 @@ namespace TDD {
 +## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
 +## 14-Apr-2024				byteman-spec	Fixed History									    ##
 )";
+			char* filePath = HISTORY_SANITIZER_SAMPLE_DIFF_PATH;
 			
 			//ACT
-			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(resultantTree, false);
+			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePath);
 			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
 			//ASSERT
 			EXPECT_EQ(sanity, false);
