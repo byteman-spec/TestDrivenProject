@@ -110,6 +110,28 @@ namespace TDD {
 
 		};
 
+		TEST_F(HistorySanitizerTest, SANITIZE_HISTORY_GIT_DIFF)
+		{
+			//ARRANGE
+			vector<string> invalidFileList{};
+
+			/*char* resultantTree = R"(
+
+			)";*/
+
+			string filePath = HISTORY_SANITIZER_DIR;
+			filePath += "/git_diff.txt";
+			char* filePathChar = new char[filePath.size()];
+			strcpy(filePathChar, filePath.c_str());
+
+			//ACT
+			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
+			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
+			//ASSERT
+			EXPECT_EQ(sanity, true);
+
+		};
+
 	}
 }
 
