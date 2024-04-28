@@ -38,20 +38,12 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 	{
 		cout << "Error creating log file at " << m_logFile << endl;
 	}
-	else
-	{
-		*m_logFile.get() << "Successfully opened file at :: " << m_logFile << endl;
-	}
 
 	m_filePath = fileString;
 	m_file = make_shared<fstream>(m_filePath);
 	if (!m_file->is_open())
 	{
 		*m_logFile.get() << "Error opening file at " << m_filePath << endl;
-	}
-	else
-	{
-		*m_logFile.get() << "Successfully opened file at :: " << m_filePath << endl;
 	}
 	m_invalidFiles = {};
 	m_curLine = "";
