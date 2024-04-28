@@ -29,16 +29,6 @@ static bool startsWith(const string& inputString, const string& substr);
 
 HistorySanitizer::HistorySanitizer(char* fileString)
 {
-	m_filePath = fileString;
-	m_file = make_shared<fstream>(m_filePath);
-	if (!m_file->is_open())
-	{
-		cout << "Error opening file at " << m_filePath<<endl;
-	}
-	else
-	{
-		cout << "Successfully opened file at :: " << m_filePath << endl;
-	}
 	string logFilePath = HISTORY_SANITIZER_DIR;
 	logFilePath += "/sanityLog.txt";
 	char* logFilePathChar = new char[logFilePath.size()];
@@ -50,7 +40,18 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 	}
 	else
 	{
-		cout << "Successfully opened file at :: " << m_logFile << endl;
+		*m_logFile.get() << "Successfully opened file at :: " << m_logFile << endl;
+	}
+
+	m_filePath = fileString;
+	m_file = make_shared<fstream>(m_filePath);
+	if (!m_file->is_open())
+	{
+		*m_logFile.get() << "Error opening file at " << m_filePath << endl;
+	}
+	else
+	{
+		*m_logFile.get() << "Successfully opened file at :: " << m_filePath << endl;
 	}
 	m_invalidFiles = {};
 	m_curLine = "";

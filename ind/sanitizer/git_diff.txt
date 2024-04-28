@@ -1,3 +1,0 @@
-+++ b/ind/sanitizer/src/config/config.h
-+++ b/ind/sanitizer/src/ind_sanitizer_historysanitizer.cpp
--## 14-Apr-2024				byteman-spec	Fixed History									    ##
