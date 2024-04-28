@@ -4,7 +4,6 @@
 ## HISTORY																						##
 ## DATE						#USERNAME		#DESC												##
 ## 08-Apr-2024				byteman-spec	Implementation for lexer				       		##
-## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "include/ind_sanitizer_historysanitizer.hpp"
 #include <string>
