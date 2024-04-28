@@ -50,11 +50,10 @@ jobs:
 
     - name: Run Sanitizer
       run: |
+        cd build
         pwd
         ls
-        cd build
-        ls
-        ctest -R build/SanitizerTests
+        ctest -R SanitizerTests
 
 
  # This job will run only if the previous jobs fail
