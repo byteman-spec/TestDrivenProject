@@ -1,3 +1,2 @@
 +++ b/ind/sanitizer/git_diff.txt
 +++ b/ind/sanitizer/src/config/config.h
-+++ b/ind/sanitizer/src/ind_sanitizer_historysanitizer.cpp

@@ -1,2 +1,0 @@
-Warning :: Invalid history event in :: ind/sanitizer/src/ind_sanitizer_historysanitizer.cpp
-[HistoryEvent]::+++ b/ind/sanitizer/src/ind_sanitizer_historysanitizer.cpp

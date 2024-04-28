@@ -133,7 +133,7 @@ bool HistorySanitizer::Sanitize()
 		}
 		if (m_file->eof())
 		{
-			if (!m_historyAdded)
+			if (!m_historyAdded && !m_parentFile.empty())
 			{
 				if (std::find(m_invalidFiles.begin(), m_invalidFiles.end(), m_parentFile) == m_invalidFiles.end())
 				{
