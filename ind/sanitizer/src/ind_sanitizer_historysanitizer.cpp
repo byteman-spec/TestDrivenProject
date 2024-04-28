@@ -30,7 +30,7 @@ static bool startsWith(const string& inputString, const string& substr);
 HistorySanitizer::HistorySanitizer(char* fileString)
 {
 	m_filePath = fileString;
-	m_file = make_shared<ifstream>(m_filePath);
+	m_file = make_shared<fstream>(m_filePath);
 	if (!m_file->is_open())
 	{
 		cout << "Error opening file at " << m_filePath<<endl;
@@ -38,6 +38,19 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 	else
 	{
 		cout << "Successfully opened file at :: " << m_filePath << endl;
+	}
+	string logFilePath = HISTORY_SANITIZER_DIR;
+	logFilePath += "/sanityLog.txt";
+	char* logFilePathChar = new char[logFilePath.size()];
+	strcpy(logFilePathChar, logFilePath.c_str());
+	m_logFile = make_shared<fstream>(logFilePathChar, std::ios::out | std::ios::app);
+	if (!m_logFile->is_open())
+	{
+		cout << "Error creating log file at " << m_logFile << endl;
+	}
+	else
+	{
+		cout << "Successfully opened file at :: " << m_logFile << endl;
 	}
 	m_invalidFiles = {};
 	m_curLine = "";
@@ -101,8 +114,8 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 					//history event will only be valid if it contains only 1 historical addition
 					if (!SanitizeLine())
 					{
-						cout << "Warning :: Invalid history event in :: " << m_parentFile << endl;
-						cout << "[HistoryEvent]::" << m_curLine << endl;
+						*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+						*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
 					}
 				}
 				int nextLineItr = 0;
