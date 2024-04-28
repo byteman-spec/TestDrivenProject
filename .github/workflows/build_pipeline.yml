@@ -10,10 +10,12 @@ on:
       branchOutput:
         description: 'Remote branch to push to'
         required: true
-jobs:
-  build_run_test:
-    runs-on: ubuntu-latest
 
+jobs:
+  Start_Pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout code with submodules recursively
       uses: actions/checkout@v3
@@ -25,29 +27,15 @@ jobs:
         mkdir build
         cd build
         cmake ..
-
-    - name: make
+    - name: Build
       run: | 
         make -C build
-
-    - name: run tests
+    - name: Run Unit tests
       run: |
         cd build
-        ctest
-
-  history_validator:
-    runs-on: ubuntu-latest
-    needs: build_run_test
-    permissions:
-      contents: write
-    if: success()
-    steps:
-    - name: Checkout code with submodules recursively
-      uses: actions/checkout@v3
-      with:
-        submodules: recursive
-
-    - name: Create diff file
+        ctest -R CompilerTests
+        
+    - name: Initiate History_Sanitizer
       env:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -56,22 +44,26 @@ jobs:
         git config --global user.name "byteman-spec"
         git switch -c ${{ github.event.inputs.branchInput }}
         git pull origin ${{ github.event.inputs.branchInput }} 
-        git diff . | grep -E "^/+/+/+ b ^[+-]#{1,2}"
-        
-
-# This job will run only if the previous jobs fail
+        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > ind/sanitizer/git_diff.txt 
+    - name: Run Sanitizer
+      run: |
+        cd build
+        pwd
+        ls
+        ctest -R SanitizerTests
  # This job will run only if the previous jobs fail
-  stop_push:
+ # This job will run only if the previous jobs fail
+  Abort:
     runs-on: ubuntu-latest
-    needs: build_run_test
+    needs: Start_Pipeline
     if: failure()
     steps:
-    - name: Stop Push and Show Error
+    - name: Exit_Pipeline
       run: exit 1
 
-  keep_push:
+  Deploy:
     runs-on: ubuntu-latest
-    needs: build_run_test
+    needs: Start_Pipeline
     permissions:
       contents: write
     if: success()
