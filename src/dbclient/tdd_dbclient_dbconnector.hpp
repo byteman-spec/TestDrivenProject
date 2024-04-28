@@ -1,9 +1,9 @@
 /*################################################################################################
-#Header class for DBClient																		##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Interface for dbclient created for GtestMocking     ##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header class for DBClient																	##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Interface for dbclient created for GtestMocking     ##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_DBCLIENT_DBCONNECTOR_HPP
 #define	TDD_DBCLIENT_DBCONNECTOR_HPP

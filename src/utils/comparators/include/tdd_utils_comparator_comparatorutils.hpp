@@ -1,10 +1,10 @@
 /*################################################################################################
-#Header for ComparatorUtils																		##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for ComparatorUtils							##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header for ComparatorUtils																	##
+## 																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Header for ComparatorUtils							##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_UTILS_COMPARATOR_COMPARATORUTILS_HPP
 #define	TDD_UTILS_COMPARATOR_COMPARATORUTILS_HPP

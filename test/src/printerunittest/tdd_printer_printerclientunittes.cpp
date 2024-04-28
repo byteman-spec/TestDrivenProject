@@ -1,10 +1,10 @@
 ﻿/*################################################################################################
-#Unit test for IPrinterClient																	##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Unit test for IPrinterClient						##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Unit test for IPrinterClient																	##
+##																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Unit test for IPrinterClient						##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include <gtest/gtest.h>
 #include <string>

@@ -1,11 +1,11 @@
 /*################################################################################################
-#Interface for Parser		 																	##
-#Used to create a binary syntax tree from the syntax tokens										##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Interface for parser			       			    ##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Interface for Parser		 																	##
+## Used to create a binary syntax tree from the syntax tokens									##
+##																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Interface for parser			       			    ##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_LEXER_IPARSER_HPP
 #define	TDD_LEXER_IPARSER_HPP

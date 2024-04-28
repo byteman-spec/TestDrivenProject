@@ -30,6 +30,6 @@ int main(int argc_, char** argv)
 {
 	testing::InitGoogleTest(&argc_, argv);
 	
-	testing::GTEST_FLAG(filter) = "LexerTest.*:ParserTest.*:PrinterTest.*";
+	testing::GTEST_FLAG(filter) = "HistorySanitizerTest.*";
 	return RUN_ALL_TESTS();
 }

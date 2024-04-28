@@ -1,10 +1,10 @@
 /*################################################################################################
-#Unit test for ILexerClient																		##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Unit test for ILexerClient						    ##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Unit test for ILexerClient																	##
+##																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Unit test for ILexerClient						    ##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include <gtest/gtest.h>
 #include <string>

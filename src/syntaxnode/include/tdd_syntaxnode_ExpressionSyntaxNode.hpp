@@ -1,10 +1,10 @@
 /*################################################################################################
-#Header for ExpressionSyntaxNode																##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for ExpressionSyntaxNode						##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header for ExpressionSyntaxNode																##
+## 																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Header for ExpressionSyntaxNode						##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP
 #define	TDD_SYNTAXNODE_EXPRESSIONSYNTAXNODE_HPP

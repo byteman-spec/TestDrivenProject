@@ -1,10 +1,10 @@
 /*################################################################################################
-#Header for BinaryExpressionSyntaxNode															##
-#																								##
-#HISTORY																						##
-#DATE						#USERNAME		#DESC												##
-#08-Apr-2024				byteman-spec	Header for BinaryExpressionSyntaxNode				##
-#14-Apr-2024				byteman-spec	Fixed History									    ##
+## Header for BinaryExpressionSyntaxNode														##
+##																								##
+## HISTORY																						##
+## DATE						#USERNAME		#DESC												##
+## 08-Apr-2024				byteman-spec	Header for BinaryExpressionSyntaxNode				##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #ifndef TDD_SYNTAXNODE_BINARYEXPRESSIONSYNTAXNODE_HPP
 #define	TDD_SYNTAXNODE_BINARYEXPRESSIONSYNTAXNODE_HPP
