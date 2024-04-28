@@ -58,6 +58,8 @@ jobs:
       run: |
         cd build
         ctest -R SanitizerTests
+        cd ../
+        cat ind/sanitizer/sanityLog.txt
 
 
  # This job will run only if the previous jobs fail
