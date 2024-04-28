@@ -56,12 +56,9 @@ jobs:
 
     - name: Run Sanitizer
       run: |
-        chmod 755 ind/sanitizer/git_diff.txt 
-        chmod 755 ind/sanitizer/test/historysanitizerunittest/SampleDiffInvalid.txt
-        chmod 755 ind/sanitizer/test/historysanitizerunittest/SampleDiffValid.txt
         cd build
         ctest -R SanitizerTests || true
-      
+        cat /home/runner/work/TestDrivenProject/TestDrivenProject/build/Testing/Temporary/LastTest.log
 
     - name: Show Sanitizer Logs
       run: |
