@@ -101,8 +101,8 @@ namespace TDD {
 			//ACT
 			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
 			//bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
-			string failedFile = historySanitizorPtr->GetInvalidFileList()[0];
-			string expectedFailedFile = "ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp";
+			//string failedFile = historySanitizorPtr->GetInvalidFileList()[0];
+			//string expectedFailedFile = "ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp";
 			//ASSERT
 			//EXPECT_EQ(sanity, false);
 			//EXPECT_STREQ(failedFile.c_str(), expectedFailedFile.c_str());
@@ -126,9 +126,9 @@ namespace TDD {
 
 			//ACT
 			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
-			//bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
+			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
 			//ASSERT
-			//EXPECT_EQ(sanity, true);
+			EXPECT_EQ(sanity, true);
 
 		};
 
