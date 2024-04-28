@@ -21,6 +21,9 @@ using namespace IND::SANITIZER;
 
 #define EOF_MARK 0
 
+
+//New Comment
+// 
 //-----------------Static Functions---------------------
 static string getFileExtenstion(const string& diffText);
 static string getValidFileName(const string& diffText);
