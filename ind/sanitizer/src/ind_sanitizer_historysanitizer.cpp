@@ -20,6 +20,8 @@ using namespace std;
 using namespace IND;
 using namespace IND::SANITIZER;
 
+#define EOF_MARK 0
+
 //-----------------Static Functions---------------------
 static string getFileExtenstion(const string& diffText);
 static string getValidFileName(const string& diffText);
@@ -63,7 +65,7 @@ int HistorySanitizer::GetNextLine()
 	{
 		return m_curLine.size();
 	}
-	else return (int)feof;
+	else return EOF_MARK;
 }
 
 bool HistorySanitizer::IsNewParentFile()
@@ -89,7 +91,7 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 			if (!m_parentFile.empty())
 			{
 
-				if ((GetNextLine() != (int)feof))
+				if ((GetNextLine() !=EOF_MARK))
 				{
 					//validate the next line
 					//if invalid history event,add to list of invalid files
@@ -105,7 +107,7 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 				do
 				{
 					nextLineItr = GetNextLine();
-					if (nextLineItr != (int)feof)
+					if (nextLineItr != EOF_MARK)
 					{
 						if (!IsNewParentFile())
 						{
