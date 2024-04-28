@@ -52,10 +52,11 @@ jobs:
         pwd
         git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
         cat git_diff.txt
-        cd ../../
+        
 
     - name: Run Sanitizer
       run: |
+        pwd
         cd build
         ctest -R SanitizerTests || true
         cat /home/runner/work/TestDrivenProject/TestDrivenProject/build/Testing/Temporary/LastTest.log
@@ -64,6 +65,8 @@ jobs:
       run: |
         pwd
         cat ind/sanitizer/sanityLog.txt
+        cd ind/sanitizer
+        ls
            
 
 
