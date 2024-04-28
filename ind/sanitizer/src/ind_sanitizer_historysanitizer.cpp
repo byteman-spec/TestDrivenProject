@@ -4,6 +4,7 @@
 ## HISTORY																						##
 ## DATE						#USERNAME		#DESC												##
 ## 08-Apr-2024				byteman-spec	Implementation for lexer				       		##
+## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "include/ind_sanitizer_historysanitizer.hpp"
 #include <string>
@@ -120,6 +121,8 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 					}
 					else
 					{
+						*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
+						m_invalidFiles.emplace_back(m_parentFile);
 						m_parentFile = getValidFileName(m_curLine);
 					}
 				}
@@ -139,6 +142,8 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 						}
 						else
 						{
+							*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
+							m_invalidFiles.emplace_back(m_parentFile);
 							m_parentFile = getValidFileName(m_curLine);
 						}
 					}
