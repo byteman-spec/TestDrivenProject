@@ -15,7 +15,7 @@ jobs:
   Start_Pipeline:
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read , write'
+      contents:  write
     steps:
     - name: Checkout code with submodules recursively
       uses: actions/checkout@v3
@@ -56,6 +56,9 @@ jobs:
 
     - name: Run Sanitizer
       run: |
+        chmod 755 ind/sanitizer/git_diff.txt 
+        chmod 755 ind/sanitizer/test/historysanitizerunittest/SampleDiffInvalid.txt
+        chmod 755 ind/sanitizer/test/historysanitizerunittest/SampleDiffValid.txt
         cd build
         ctest -R SanitizerTests || true
       
