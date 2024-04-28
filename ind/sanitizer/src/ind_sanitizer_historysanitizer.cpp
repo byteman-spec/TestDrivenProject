@@ -36,6 +36,10 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 	{
 		cout << "Error opening file at " << m_filePath<<endl;
 	}
+	else
+	{
+		cout << "Successfully opened file at :: " << m_filePath << endl;
+	}
 	m_invalidFiles = {};
 	m_curLine = "";
 	m_parentFile = "";
