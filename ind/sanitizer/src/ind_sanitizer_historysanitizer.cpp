@@ -119,7 +119,11 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 					{
 						if (!IsNewParentFile())
 						{
-							SanitizeLine();
+							if (!SanitizeLine())
+							{
+								*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+								*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+							}
 						}
 					}
 				} while (!IsNewParentFile() && !m_file->eof());
@@ -162,7 +166,7 @@ static string getValidFileName(const string &diffText)
 	if (strcmp(fileExt.c_str(), "cpp") == 0 ||
 		strcmp(fileExt.c_str(), "hpp") == 0)
 	{
-		return getLastSubstrAfter(diffText, "\+\+\+ b/");
+		return getLastSubstrAfter(diffText, "+++ b/");
 	}
 	return "";
 }
