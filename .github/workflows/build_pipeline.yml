@@ -58,8 +58,7 @@ jobs:
       run: |
         cd build
         ctest -R SanitizerTests
-        cd ../
-        cat ind/sanitizer/sanityLog.txt
+      
 
     - name: Show Sanitizer Logs
       run: |
