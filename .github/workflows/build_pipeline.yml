@@ -27,6 +27,7 @@ jobs:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
+        pwd
         git config --global user.email "explodefromdelhi@github.com"
         git config --global user.name "byteman-spec"
         git switch -c ${{ github.event.inputs.branchInput }}
