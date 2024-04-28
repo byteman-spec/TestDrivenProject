@@ -23,7 +23,14 @@ jobs:
         submodules: recursive
         
     - name: configure
+      env:
+        GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
+        git config --global user.email "explodefromdelhi@github.com"
+        git config --global user.name "byteman-spec"
+        git switch -c ${{ github.event.inputs.branchInput }}
+        git pull origin ${{ github.event.inputs.branchInput }} 
         mkdir build
         cd build
         cmake ..
@@ -38,21 +45,13 @@ jobs:
         ctest -R CompilerTests
         
     - name: Initiate History_Sanitizer
-      env:
-        GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
-        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
-        git config --global user.email "explodefromdelhi@github.com"
-        git config --global user.name "byteman-spec"
-        git switch -c ${{ github.event.inputs.branchInput }}
-        git pull origin ${{ github.event.inputs.branchInput }} 
+        cd ../
         git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > ind/sanitizer/git_diff.txt 
 
     - name: Run Sanitizer
       run: |
         cd build
-        pwd
-        ls
         ctest -R SanitizerTests
 
 
