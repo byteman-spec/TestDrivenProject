@@ -47,7 +47,7 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Create diff file
+    - name: Run History Validator
       env:
         GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
@@ -58,8 +58,9 @@ jobs:
         git pull origin ${{ github.event.inputs.branchInput }} 
         cd ind/sanitizer
         git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
-        cat git_diff.txt 
-
+        cd ../../
+        ctest -R SanitizerTests
+  
         
 
 # This job will run only if the previous jobs fail
