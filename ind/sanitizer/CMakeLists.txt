@@ -4,8 +4,17 @@ set(This SanitizerTests)
 project(${This} C CXX)
 set(CMAKE_CXX_STANDARD 17)
 
+# Check CMAKE_SYSTEM_NAME
+if (CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set (PLATFORM "WNT")
+elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set (PLATFORM "LNX")
+endif ()
+
 set (HISTORY_SANITIZER_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set (HISTORY_SANITIZER_SAMPLE_DIFF_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/historysanitizerunittest/SampleDiff.txt")
+set (WNT "WNT")
+set (LNX "LNX")
+set (HISTORY_SANITIZER_SAMPLE_DIFF_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/historysanitizerunittest")
 
 set(CONFIG_TEMPLATE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/config")
 set(CONFIG_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/config")

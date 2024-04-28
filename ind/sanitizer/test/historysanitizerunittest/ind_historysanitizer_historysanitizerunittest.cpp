@@ -35,11 +35,12 @@ namespace TDD {
 			}
 		};
 
-		TEST_F(HistorySanitizerTest, SANITIZE_HISTORY_FAIL)
+		TEST_F(HistorySanitizerTest, SANITIZE_HISTORY_PASS)
 		{
 			//ARRANGE
 			vector<string> invalidFileList{};
-			char* resultantTree = R"(
+
+/*char* resultantTree = R"(
 +++ b/CMakeLists.txt
 +++ b/ind/b_push.bat
 +++ b/ind/sanitizer/CMakeLists.txt
@@ -55,14 +56,57 @@ namespace TDD {
 +++ b/ind/sanitizer/test/historysanitizerunittest/include/ind_historysanitizer_mockhistorysanitizer.hpp
 +## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
 +## 14-Apr-2024				byteman-spec	Fixed History									    ##
-)";
-			char* filePath = HISTORY_SANITIZER_SAMPLE_DIFF_PATH;
-			
+)";*/
+
+			string filePath = HISTORY_SANITIZER_SAMPLE_DIFF_PATH;
+			filePath += "/SampleDiffValid.txt";
+			char* filePathChar = new char[filePath.size()];
+			strcpy(filePathChar, filePath.c_str());
+		
 			//ACT
-			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePath);
+			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
 			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
 			//ASSERT
+			EXPECT_EQ(sanity, true);
+
+		};
+
+		TEST_F(HistorySanitizerTest, SANITIZE_HISTORY_FAIL)
+		{
+			//ARRANGE
+			vector<string> invalidFileList{};
+
+			/*char* resultantTree = R"(
++++ b/CMakeLists.txt
++++ b/ind/b_push.bat
++++ b/ind/sanitizer/CMakeLists.txt
++++ b/ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp
+-## 08-Apr-2024				byteman-spec	Initial Creation								    ##
++++ b/ind/sanitizer/src/historysanitizer/tdd_lexer_lexerunittest.cpp
++## 08-Apr-2024				byteman-spec	Unit test for ILexerClient						    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/src/isanitizer/ind_sanitizer_isanitizer.hpp
++## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/test/historysanitizerunittest/include/ind_historysanitizer_mockhistorysanitizer.hpp
++## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
++## 14-Apr-2024				byteman-spec	Fixed History									    ##
+			)";*/
+
+			string filePath = HISTORY_SANITIZER_SAMPLE_DIFF_PATH;
+			filePath += "/SampleDiffInvalid.txt";
+			char* filePathChar = new char[filePath.size()];
+			strcpy(filePathChar, filePath.c_str());
+
+			//ACT
+			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
+			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
+			string failedFile = historySanitizorPtr->GetInvalidFileList()[0];
+			string expectedFailedFile = "ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp";
+			//ASSERT
 			EXPECT_EQ(sanity, false);
+			EXPECT_STREQ(failedFile.c_str(), expectedFailedFile.c_str());
+
 
 		};
 

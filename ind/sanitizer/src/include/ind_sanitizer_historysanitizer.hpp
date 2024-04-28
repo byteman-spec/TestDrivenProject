@@ -14,6 +14,7 @@
 #include <gmock/gmock.h>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace testing;
 using ::testing::AtLeast;
@@ -28,13 +29,23 @@ namespace IND {
 
 		class HistorySanitizer;
 		using HistorySanitizerPtr = shared_ptr<HistorySanitizer>;
+
+		using FilePtr = shared_ptr<ifstream>;
 		class HistorySanitizer : public ISanitizer {
 
 			char* m_filePath;
+			FilePtr m_file;
+			string m_curLine;
+			string m_parentFile;
+			vector<string> m_invalidFiles;
+			int GetNextLine();
+			bool SanitizeLine();
+			bool IsNewParentFile();
 		public:
 			HistorySanitizer(char* filePath);
 
-			bool Sanitize(vector<string>& invalidFiles) const override;
+			bool Sanitize(vector<string>& invalidFiles)  override;
+			vector<string> GetInvalidFileList() const override;
 		};
 
 	}
