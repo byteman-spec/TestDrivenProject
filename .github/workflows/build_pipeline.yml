@@ -51,7 +51,6 @@ jobs:
         cd ind/sanitizer
         pwd
         git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
-        cat git_diff.txt
         
 
     - name: Run Sanitizer
@@ -63,11 +62,7 @@ jobs:
 
     - name: Show Sanitizer Logs
       run: |
-        pwd
         cat ind/sanitizer/sanityLog.txt
-        cd ind/sanitizer
-        ls
-        cat sanityLog.txt
 
 
  # This job will run only if the previous jobs fail
