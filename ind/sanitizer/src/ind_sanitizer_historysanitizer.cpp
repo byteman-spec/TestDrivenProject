@@ -11,6 +11,7 @@
 #include <vector>
 #include <fstream>
 #include <regex>
+#include <iostream>
 #include "config/config.h"
 
 
@@ -22,6 +23,7 @@ using namespace IND::SANITIZER;
 static string getFileExtenstion(const string& diffText);
 static string getValidFileName(const string& diffText);
 static string getValidFilePath(const string& filePath);
+static bool startsWith(const string& inputString, const string& substr);
 //-----------------Function Definitions-----------------
 
 HistorySanitizer::HistorySanitizer(char* fileString)
@@ -38,11 +40,12 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 
 }
 
+
 bool HistorySanitizer::SanitizeLine()
 {
 	if (!m_curLine.empty())
 	{
-		if (m_curLine._Starts_with("-"))
+		if (startsWith(m_curLine,"-"))
 		{
 			m_invalidFiles.emplace_back(m_parentFile);
 			return false;
@@ -162,4 +165,9 @@ string getValidFilePath(const string& filePath)
 	//No modification needed
 #endif
 	return filePath;
+}
+
+static bool startsWith(const string& inputString, const string& substr)
+{
+	return (inputString.find(substr) == 0);
 }
