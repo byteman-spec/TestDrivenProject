@@ -67,7 +67,7 @@ jobs:
         cat ind/sanitizer/sanityLog.txt
         cd ind/sanitizer
         ls
-           
+        cat sanityLog.txt
 
 
  # This job will run only if the previous jobs fail
