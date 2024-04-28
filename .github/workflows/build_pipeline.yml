@@ -56,8 +56,9 @@ jobs:
         git config --global user.name "byteman-spec"
         git switch -c ${{ github.event.inputs.branchInput }}
         git pull origin ${{ github.event.inputs.branchInput }} 
-        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]"
-
+        cd ind/sanitizer
+        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
+        cat git_diff.txt 
 
         
 
