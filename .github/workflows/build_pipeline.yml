@@ -61,6 +61,11 @@ jobs:
         cd ../
         cat ind/sanitizer/sanityLog.txt
 
+    - name: Show Sanitizer Logs
+      run: |
+        cat ind/sanitizer/sanityLog.txt
+      
+
 
  # This job will run only if the previous jobs fail
  # This job will run only if the previous jobs fail
