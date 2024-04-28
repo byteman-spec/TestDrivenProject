@@ -15,7 +15,7 @@ jobs:
   Start_Pipeline:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write, read, execute
     steps:
     - name: Checkout code with submodules recursively
       uses: actions/checkout@v3
