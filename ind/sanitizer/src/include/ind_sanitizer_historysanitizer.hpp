@@ -30,11 +30,12 @@ namespace IND {
 		class HistorySanitizer;
 		using HistorySanitizerPtr = shared_ptr<HistorySanitizer>;
 
-		using FilePtr = shared_ptr<ifstream>;
+		using FilePtr = shared_ptr<fstream>;
 		class HistorySanitizer : public ISanitizer {
 
 			char* m_filePath;
 			FilePtr m_file;
+			FilePtr m_logFile;
 			string m_curLine;
 			string m_parentFile;
 			vector<string> m_invalidFiles;

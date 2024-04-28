@@ -19,6 +19,8 @@ using namespace std;
 using namespace IND;
 using namespace IND::SANITIZER;
 
+#define EOF_MARK 0
+
 //-----------------Static Functions---------------------
 static string getFileExtenstion(const string& diffText);
 static string getValidFileName(const string& diffText);
@@ -28,11 +30,21 @@ static bool startsWith(const string& inputString, const string& substr);
 
 HistorySanitizer::HistorySanitizer(char* fileString)
 {
+	string logFilePath = HISTORY_SANITIZER_DIR;
+	logFilePath += "/sanityLog.txt";
+	char* logFilePathChar = new char[logFilePath.size()];
+	strcpy(logFilePathChar, logFilePath.c_str());
+	m_logFile = make_shared<fstream>(logFilePathChar, std::ios::out | std::ios::trunc);
+	if (!m_logFile->is_open())
+	{
+		cout << "Error creating log file at " << m_logFile << endl;
+	}
+
 	m_filePath = fileString;
-	m_file = make_shared<ifstream>(m_filePath);
+	m_file = make_shared<fstream>(m_filePath);
 	if (!m_file->is_open())
 	{
-		cout << "Error opening file at " << m_filePath<<endl;
+		*m_logFile.get() << "Error opening file at " << m_filePath << endl;
 	}
 	m_invalidFiles = {};
 	m_curLine = "";
@@ -62,7 +74,7 @@ int HistorySanitizer::GetNextLine()
 	{
 		return m_curLine.size();
 	}
-	else return (int)eof;
+	else return EOF_MARK;
 }
 
 bool HistorySanitizer::IsNewParentFile()
@@ -87,27 +99,43 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 			m_parentFile = getValidFileName(m_curLine);
 			if (!m_parentFile.empty())
 			{
-				if ((GetNextLine() != (int)eof))
+
+				if ((GetNextLine() !=EOF_MARK))
 				{
-					//validate the next line
-					//if invalid history event,add to list of invalid files
-					//if valid history event, continue
-					//history event will only be valid if it contains only 1 historical addition
-					if (!SanitizeLine())
+					if (!IsNewParentFile())
 					{
-						cout << "Warning :: Invalid history event in :: " << m_parentFile << endl;
-						cout << "[HistoryEvent]::" << m_curLine << endl;
+						//validate the next line
+						//if invalid history event,add to list of invalid files
+						//if valid history event, continue
+						//history event will only be valid if it contains only 1 historical addition
+						if (!SanitizeLine())
+						{
+							*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+							*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+						}
+					}
+					else
+					{
+						m_parentFile = getValidFileName(m_curLine);
 					}
 				}
 				int nextLineItr = 0;
 				do
 				{
 					nextLineItr = GetNextLine();
-					if (nextLineItr != (int)eof)
+					if (nextLineItr != EOF_MARK)
 					{
 						if (!IsNewParentFile())
 						{
-							SanitizeLine();
+							if (!SanitizeLine())
+							{
+								*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+								*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+							}
+						}
+						else
+						{
+							m_parentFile = getValidFileName(m_curLine);
 						}
 					}
 				} while (!IsNewParentFile() && !m_file->eof());
@@ -150,7 +178,7 @@ static string getValidFileName(const string &diffText)
 	if (strcmp(fileExt.c_str(), "cpp") == 0 ||
 		strcmp(fileExt.c_str(), "hpp") == 0)
 	{
-		return getLastSubstrAfter(diffText, "\+\+\+ b/");
+		return getLastSubstrAfter(diffText, "+++ b/");
 	}
 	return "";
 }
