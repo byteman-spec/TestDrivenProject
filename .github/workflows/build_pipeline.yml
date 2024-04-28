@@ -63,6 +63,11 @@ jobs:
     - name: Show Sanitizer Logs
       run: |
         cat ind/sanitizer/sanityLog.txt
+        if [ -s  ind/sanitizer/sanityLog.txt ]; then
+        return true
+        else
+        return false
+        fi
       
 
 
