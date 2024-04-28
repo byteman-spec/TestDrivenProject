@@ -31,7 +31,7 @@ namespace IND {
 		class ISanitizer {
 		
 		public:
-			virtual bool Sanitize(vector<string> &invalidFiles) = 0;
+			virtual bool Sanitize() = 0;
 			virtual vector<string> GetInvalidFileList() const = 0;
 		};
 

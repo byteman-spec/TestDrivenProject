@@ -54,14 +54,22 @@ HistorySanitizer::HistorySanitizer(char* fileString)
 	m_invalidFiles = {};
 	m_curLine = "";
 	m_parentFile = "";
+	m_historyAdded = false;
 
 }
 
+bool HistorySanitizer::IsValidHistoryLine()
+{
+	return !startsWith(m_curLine, "+++ b/");
+	
+	
+}
 
 bool HistorySanitizer::SanitizeLine()
 {
 	if (!m_curLine.empty())
 	{
+		m_historyAdded = true;
 		if (startsWith(m_curLine,"-"))
 		{
 			m_invalidFiles.emplace_back(m_parentFile);
@@ -69,8 +77,8 @@ bool HistorySanitizer::SanitizeLine()
 		}
 		//We are not checking if there have been multiple historical editions
 		//per push as one push might be a work spanning accross days of efforts.
-		return true;
 	}
+	return true;
 }
 
 int HistorySanitizer::GetNextLine()
@@ -88,7 +96,7 @@ bool HistorySanitizer::IsNewParentFile()
 }
 
 
-bool HistorySanitizer::Sanitize(vector<string>& invalidFiles) 
+bool HistorySanitizer::Sanitize() 
 {
 	//create a unique file pointer and open and store the file in that 
 	//while constructing. henceforth check if m_fileptr is null or not
@@ -97,61 +105,44 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 	{
 		while (!m_file->eof()) { // Read each line from the file
 		// Process the line here, for example, you can print it
-			if (!IsNewParentFile())
+			GetNextLine();
+			if (IsNewParentFile())
 			{
-				GetNextLine();
-			}
-			m_parentFile = getValidFileName(m_curLine);
-			if (!m_parentFile.empty())
-			{
-
-				if ((GetNextLine() !=EOF_MARK))
+				if (m_historyAdded || m_parentFile.empty())
 				{
-					if (!IsNewParentFile())
-					{
-						//validate the next line
-						//if invalid history event,add to list of invalid files
-						//if valid history event, continue
-						//history event will only be valid if it contains only 1 historical addition
-						if (!SanitizeLine())
-						{
-							*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
-							*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
-						}
-					}
-					else
-					{
-						*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
-						m_invalidFiles.emplace_back(m_parentFile);
-						m_parentFile = getValidFileName(m_curLine);
-					}
+					m_parentFile = getValidFileName(m_curLine);
+					m_historyAdded = false;
+					Sanitize();
 				}
-				int nextLineItr = 0;
-				do
+				else
 				{
-					nextLineItr = GetNextLine();
-					if (nextLineItr != EOF_MARK)
-					{
-						if (!IsNewParentFile())
-						{
-							if (!SanitizeLine())
-							{
-								*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
-								*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
-							}
-						}
-						else
-						{
-							*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
-							m_invalidFiles.emplace_back(m_parentFile);
-							m_parentFile = getValidFileName(m_curLine);
-						}
-					}
-				} while (!IsNewParentFile() && !m_file->eof());
-
-
+					*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
+					m_invalidFiles.emplace_back(m_parentFile);
+					m_parentFile = getValidFileName(m_curLine);
+					Sanitize();
+				}
 			}
-
+			else
+			{
+				if (IsValidHistoryLine() && !SanitizeLine())
+				{
+					*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+					*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+				}
+			}
+		}
+		if (m_file->eof())
+		{
+			if (!m_historyAdded)
+			{
+				if (std::find(m_invalidFiles.begin(), m_invalidFiles.end(), m_parentFile) == m_invalidFiles.end())
+				{
+					*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
+					*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+					m_invalidFiles.emplace_back(m_parentFile);
+					return m_invalidFiles.empty();
+				}
+			}
 		}
 	}
 	return m_invalidFiles.empty();
@@ -206,5 +197,5 @@ string getValidFilePath(const string& filePath)
 
 static bool startsWith(const string& inputString, const string& substr)
 {
-	return (inputString.find(substr) == 0);
+	return (!inputString.empty() && inputString.find(substr) == 0);
 }

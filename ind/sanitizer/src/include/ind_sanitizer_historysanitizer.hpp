@@ -41,11 +41,13 @@ namespace IND {
 			vector<string> m_invalidFiles;
 			int GetNextLine();
 			bool SanitizeLine();
+			bool m_historyAdded;
 			bool IsNewParentFile();
+			bool IsValidHistoryLine();
 		public:
 			HistorySanitizer(char* filePath);
 
-			bool Sanitize(vector<string>& invalidFiles)  override;
+			bool Sanitize()  override;
 			vector<string> GetInvalidFileList() const override;
 		};
 

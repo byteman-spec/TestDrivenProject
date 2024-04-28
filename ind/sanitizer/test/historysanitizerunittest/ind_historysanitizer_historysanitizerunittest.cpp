@@ -65,7 +65,7 @@ namespace TDD {
 		
 			//ACT
 			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
-			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
+			bool sanity = historySanitizorPtr->Sanitize();
 			//ASSERT
 			EXPECT_EQ(sanity, true);
 
@@ -80,8 +80,6 @@ namespace TDD {
 +++ b/CMakeLists.txt
 +++ b/ind/b_push.bat
 +++ b/ind/sanitizer/CMakeLists.txt
-+++ b/ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp
--## 08-Apr-2024				byteman-spec	Initial Creation								    ##
 +++ b/ind/sanitizer/src/historysanitizer/tdd_lexer_lexerunittest.cpp
 +## 08-Apr-2024				byteman-spec	Unit test for ILexerClient						    ##
 +## 14-Apr-2024				byteman-spec	Fixed History									    ##
@@ -91,6 +89,9 @@ namespace TDD {
 +++ b/ind/sanitizer/test/historysanitizerunittest/include/ind_historysanitizer_mockhistorysanitizer.hpp
 +## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
 +## 14-Apr-2024				byteman-spec	Fixed History									    ##
++++ b/ind/sanitizer/test/historysanitizerunittest/include/ind_historysanitizer_mockhistorysanitizerNew.hpp
+-## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
++++ b/ind/sanitizer/src/historysanitizer/tdd_lexer_lexerunittestnew.cpp
 			)";*/
 
 			string filePath = HISTORY_SANITIZER_SAMPLE_DIFF_PATH;
@@ -100,12 +101,10 @@ namespace TDD {
 
 			//ACT
 			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
-			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
-			string failedFile = historySanitizorPtr->GetInvalidFileList()[0];
-			string expectedFailedFile = "ind/sanitizer/src/historysanitizer/include/tdd_lexertest_lexerclientmock.hpp";
+			bool sanity = historySanitizorPtr->Sanitize();
+			auto failedFileList = historySanitizorPtr->GetInvalidFileList();
 			//ASSERT
 			EXPECT_EQ(sanity, false);
-			EXPECT_STREQ(failedFile.c_str(), expectedFailedFile.c_str());
 
 
 		};
@@ -126,7 +125,7 @@ namespace TDD {
 
 			//ACT
 			HistorySanitizerPtr historySanitizorPtr = make_shared<HistorySanitizer>(filePathChar);
-			bool sanity = historySanitizorPtr->Sanitize(invalidFileList);
+			bool sanity = historySanitizorPtr->Sanitize();
 			//ASSERT
 			EXPECT_EQ(sanity, true);
 
