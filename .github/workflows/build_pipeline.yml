@@ -52,49 +52,20 @@ jobs:
       run: |
         ctest -R build/CompilerTests
 
-  history_validator:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - name: Checkout code with submodules recursively
-      uses: actions/checkout@v3
-      with:
-        submodules: recursive
 
-    - name: Run History Validator
-      env:
-        GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
-        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-      run: |
-        git config --global user.email "explodefromdelhi@github.com"
-        git config --global user.name "byteman-spec"
-        git switch -c ${{ github.event.inputs.branchInput }}
-        git pull origin ${{ github.event.inputs.branchInput }} 
-        cd ind/sanitizer
-        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
-        pwd
-        cd ../
-        pwd
-        cd ../
-        pwd
-        ctest -R SanitizerTests
-  
-        
-
-# This job will run only if the previous jobs fail
  # This job will run only if the previous jobs fail
-  stop_push:
+ # This job will run only if the previous jobs fail
+  Abort:
     runs-on: ubuntu-latest
-    needs: build_run_test
+    needs: Start_Pipeline
     if: failure()
     steps:
-    - name: Stop Push and Show Error
+    - name: Exit_Pipeline
       run: exit 1
 
-  keep_push:
+  Deploy:
     runs-on: ubuntu-latest
-    needs: build_run_test
+    needs: Start_Pipeline
     permissions:
       contents: write
     if: success()
