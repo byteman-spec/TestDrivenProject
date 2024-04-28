@@ -48,7 +48,10 @@ jobs:
     - name: Initiate History_Sanitizer
       run: |
         cd ../
-        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > ind/sanitizer/git_diff.txt 
+        pwd
+        cd ind/sanitizer
+        pwd
+        git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
 
     - name: Run Sanitizer
       run: |
