@@ -88,14 +88,8 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 			m_parentFile = getValidFileName(m_curLine);
 			if (!m_parentFile.empty())
 			{
-				int endOfFile;
-#if PLATFORM == WNT
-				endOfFile = (int)eof;
-#elif PLATFORM == LNX
-				endOfFile = (int)feof;
-#endif // PLATFORM == WNT
 
-				if ((GetNextLine() != endOfFile))
+				if ((GetNextLine() != (int)feof))
 				{
 					//validate the next line
 					//if invalid history event,add to list of invalid files
@@ -111,7 +105,7 @@ bool HistorySanitizer::Sanitize(vector<string>& invalidFiles)
 				do
 				{
 					nextLineItr = GetNextLine();
-					if (nextLineItr != endOfFile)
+					if (nextLineItr != (int)feof)
 					{
 						if (!IsNewParentFile())
 						{
