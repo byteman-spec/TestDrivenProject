@@ -65,9 +65,9 @@ jobs:
         cd ind/sanitizer
         cat sanityLog.txt
         if [ -s sanityLog.txt ]; then
-        return false
+        exit 1
         else
-        return true
+        exit 0
         fi
 
 
