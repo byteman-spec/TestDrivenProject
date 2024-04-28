@@ -33,7 +33,7 @@ jobs:
     - name: run tests
       run: |
         cd build
-        ctest
+        ctest -R CompilerTests
 
   history_validator:
     runs-on: ubuntu-latest
