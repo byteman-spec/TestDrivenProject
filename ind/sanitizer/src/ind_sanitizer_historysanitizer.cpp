@@ -5,7 +5,6 @@
 ## DATE						#USERNAME		#DESC												##
 ## 08-Apr-2024				byteman-spec	Implementation for lexer				       		##
 ## 14-Apr-2024				byteman-spec	Fixed History									    ##
-## 28-Apr-2024				byteman-spec	Added new history to check Sanitizer			    ##
 #################################################################################################*/
 #include "include/ind_sanitizer_historysanitizer.hpp"
 #include <string>
