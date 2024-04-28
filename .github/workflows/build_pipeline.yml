@@ -90,5 +90,3 @@ jobs:
         git pull origin ${{ github.event.inputs.branchInput }} 
         git switch -c ${{ github.event.inputs.branchOutput }}
         git push -f origin ${{ github.event.inputs.branchOutput }}
-        
-
