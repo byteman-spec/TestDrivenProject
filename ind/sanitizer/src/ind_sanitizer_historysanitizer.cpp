@@ -63,7 +63,7 @@ int HistorySanitizer::GetNextLine()
 	{
 		return m_curLine.size();
 	}
-	else return (int)eof;
+	else return (int)feof;
 }
 
 bool HistorySanitizer::IsNewParentFile()
