@@ -137,8 +137,7 @@ bool HistorySanitizer::Sanitize()
 			{
 				if (std::find(m_invalidFiles.begin(), m_invalidFiles.end(), m_parentFile) == m_invalidFiles.end())
 				{
-					*m_logFile.get() << "Warning :: Invalid history event in :: " << m_parentFile << endl;
-					*m_logFile.get() << "[HistoryEvent]::" << m_curLine << endl;
+					*m_logFile.get() << "Warning :: Missing history event in :: " << m_parentFile << endl;
 					m_invalidFiles.emplace_back(m_parentFile);
 					return m_invalidFiles.empty();
 				}
