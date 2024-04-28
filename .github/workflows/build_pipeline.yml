@@ -58,7 +58,11 @@ jobs:
         git pull origin ${{ github.event.inputs.branchInput }} 
         cd ind/sanitizer
         git diff origin/main | grep -E "^\+\+\+ b|^[+-]#{1,2} [0-9]" > git_diff.txt 
-        cd ../../build
+        pwd
+        cd ../
+        pwd
+        cd ../
+        pwd
         ctest -R SanitizerTests
   
         
