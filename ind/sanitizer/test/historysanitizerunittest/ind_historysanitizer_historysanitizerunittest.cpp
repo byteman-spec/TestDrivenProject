@@ -4,7 +4,6 @@
 ## HISTORY																						##
 ## DATE						#USERNAME		#DESC												##
 ## 08-Apr-2024				byteman-spec	Unit test for IDBClient							    ##
-## 14-Apr-2024				byteman-spec	Fixed History									    ##
 #################################################################################################*/
 #include "../../src/include/ind_sanitizer_historysanitizer.hpp"
 #include "../../src/config/config.h"
