@@ -18,6 +18,8 @@ using namespace TDD;
 using namespace TDD::Lexer;
 using namespace TDD::SyntaxNode;
 
+//NewCommet
+
 char LexerClient::GetCurrent()
 {
 	if (m_position >= m_queryText.length())
